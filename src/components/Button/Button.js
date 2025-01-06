@@ -1,64 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useFontStyles } from "@/components/FontSizeProvider";
-import { Button } from 'react-bootstrap';
+import { Button } from '@mui/material';
 
-const CustomButton = ({
+// Re-map caspian button variants to MUI Button variants
+const CASPIAN_TO_MUI_VARIANTS = {
+  primary: 'contained',
+  secondary: 'outlined',
+  tertiary: 'text',
+};
+
+export const CaspianButton = ({
   type = 'button',
   variant = 'primary',
-  size,
-  isOutline = false,
+  size = 'medium',
+  color = 'cta',
   isDisabled = false,
-  isBlock = false,
   onClick,
-  children,
+  title,
+  children = title,
   className = '',
+  ...rest
 }) => {
-  const colorMap = {
-    primary: '#3874ff',
-    danger: '#EC1F00',
-    success: '#25b003',
-    dark: 'black',
-    light: '#fff',
-  };
-
-  const btnClass = `btn ${isBlock ? 'd-block w-100' : ''} ${className}`.trim();
-  const { fontSizes, fontFamily, fontWeight } = useFontStyles();
-  
-  const buttonStyles = {
-    fontFamily,
-    fontWeight,
-    fontSize: fontSizes.header,
-    backgroundColor: isOutline ? 'transparent' : colorMap[variant],
-    color: isOutline ? colorMap[variant] : variant === 'light' ? 'black' : 'white',
-    border: `1px solid ${colorMap[variant]}`,
-  };
-
   return (
     <Button
+      {...rest}
       type={type}
-      className={btnClass}
+      variant={CASPIAN_TO_MUI_VARIANTS[variant]} // Map custom variant to MUI variant
+      size={size} // 'small', 'medium', or 'large'
+      color={color} // 'cta', 'danger', etc.
       disabled={isDisabled}
       onClick={onClick}
-      style={buttonStyles}
-      size={size}
+      className={className}
+      disableRipple
     >
       {children}
     </Button>
   );
 };
 
-CustomButton.propTypes = {
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'link']),
-  size: PropTypes.oneOf(['sm', 'lg']),
-  isOutline: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isBlock: PropTypes.bool,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
-
-export default CustomButton;
+export default CaspianButton;
