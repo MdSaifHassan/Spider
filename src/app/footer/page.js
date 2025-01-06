@@ -1,8 +1,7 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
-import footerData from '@/module/footer/FooterDtata';
-import TypographyComponent from '@/components/Typography/Typography';
-import DropdownComponent from '@/components/FooterDropDown/DropDown';
+import { Box, Grid, Typography } from '@mui/material';
+import footerData from '@/module/footer/FooterData';
+// import DropdownComponent from '@/components/FooterDropDown/DropDown';
 
 const Footer = () => {
   const { contact, links, copyright } = footerData;
@@ -12,19 +11,21 @@ const Footer = () => {
       <Grid container spacing={4} justifyContent="space-between">
         {/* Logo and Contact Section */}
         <Grid item xs={12} sm={4}>
-          <TypographyComponent
+          <Typography
             variant="h6"
             sx={{ fontWeight: 'bold', marginBottom: '8px' }}
-            text="Logo"
-          />
+          >
+            Logo
+          </Typography>
           {contact.map((line, index) => (
-            <TypographyComponent
+            <Typography
               key={index}
               variant="body2"
               color="textSecondary"
               gutterBottom
-              text={line}
-            />
+            >
+              {line}
+            </Typography>
           ))}
           <Box sx={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
             {footerData.socials.map((social, index) => (
@@ -61,7 +62,7 @@ const Footer = () => {
                 key={sectionIndex}
                 sx={{ display: { xs: 'block', sm: 'none' } }}
               >
-                <DropdownComponent title={section.title} items={section.items} />
+                {/* <DropdownComponent title={section.title} items={section.items} /> */}
               </Grid>
             ))}
             {links.map((section, sectionIndex) => (
@@ -71,20 +72,22 @@ const Footer = () => {
                 key={sectionIndex}
                 sx={{ display: { xs: 'none', sm: 'block' } }}
               >
-                <TypographyComponent
+                <Typography
                   variant="h6"
                   sx={{ fontWeight: 'bold', marginBottom: '8px' }}
-                  text={section.title}
                   color="#34A76C"
-                />
+                >
+                  {section.title}
+                </Typography>
                 {section.items.map((item, itemIndex) => (
-                  <TypographyComponent
+                  <Typography
                     key={itemIndex}
                     variant="body2"
                     gutterBottom
-                    text={item}
                     color="black"
-                  />
+                  >
+                    {item}
+                  </Typography>
                 ))}
               </Grid>
             ))}
@@ -105,7 +108,7 @@ const Footer = () => {
           right: 0,
         }}
       >
-        <TypographyComponent variant="body2" text={copyright} />
+        <Typography variant="body2">{copyright}</Typography>
       </Box>
     </Box>
   );

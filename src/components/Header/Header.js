@@ -13,7 +13,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import CustomButton from '@/components/Button/Button';
+import CaspianButton from '@/components/Button/Button'; // Import CaspianButton
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Header = () => {
@@ -89,22 +89,33 @@ const Header = () => {
                 </Link>
               ))}
               {/* Action Buttons */}
-              <CustomButton
-                variant="outlined"
-                color="success"
+              <CaspianButton
+                variant="tertiary"
                 size="medium"
+                style={{
+                  border: '1px solid #34A76C',
+                  color: '#34A76C',
+                  borderRadius: '5px',
+                  padding: '5px 20px',
+                }}
                 onClick={() => router.push('/login')}
               >
                 Log in
-              </CustomButton>
-              <CustomButton
-                variant="contained"
-                color="success"
+              </CaspianButton>
+              <CaspianButton
+                variant="primary"
                 size="medium"
+                style={{
+                  backgroundColor: '#34A76C',
+                  color: '#ffffff',
+                  borderRadius: '5px',
+                  padding: '5px 20px',
+                }}
                 onClick={() => router.push('/signup')}
               >
                 Sign Up
-              </CustomButton>
+              </CaspianButton>
+
             </Box>
 
             {/* Mobile Menu Icon */}
@@ -130,22 +141,33 @@ const Header = () => {
             background: '#ffffff',
           }}
         >
-          <CustomButton
-            variant="outlined"
-            color="success"
-            size="small"
+          <CaspianButton
+            variant="tertiary"
+            size="medium"
+            style={{
+              border: '1px solid #34A76C',
+              color: '#34A76C',
+              borderRadius: '5px',
+              padding: '5px 20px',
+            }}
             onClick={() => router.push('/login')}
           >
             Log in
-          </CustomButton>
-          <CustomButton
-            variant="contained"
-            color="success"
-            size="small"
+          </CaspianButton>
+          <CaspianButton
+            variant="primary"
+            size="medium"
+            style={{
+              backgroundColor: '#34A76C',
+              color: '#ffffff',
+              borderRadius: '5px',
+              padding: '5px 20px',
+            }}
             onClick={() => router.push('/signup')}
           >
             Sign Up
-          </CustomButton>
+          </CaspianButton>
+
         </Box>
       </AppBar>
 
@@ -167,13 +189,16 @@ const Header = () => {
           <List>
             {navLinks.map((link, index) => (
               <ListItem button key={index} onClick={() => router.push(link.path)}>
-                <ListItemText primary={link.title} style={{
+                <ListItemText
+                  primary={link.title}
+                  style={{
                     textDecoration: 'none',
                     color: index === 0 ? '#34A76C' : '#A0A0A0',
                     fontWeight: index === 0 ? 'bold' : 'normal',
                     fontSize: '16px',
                     borderBottom: index === 0 ? '2px solid #000000' : 'none',
-                  }}/>
+                  }}
+                />
               </ListItem>
             ))}
           </List>

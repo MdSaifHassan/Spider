@@ -1,6 +1,5 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
-import TypographyComponent from "@/components/Typography/Typography";
+import { Box, Grid, Typography } from "@mui/material";
 import aboutData from "@/module/aboutUs/aboutData";
 
 const AboutUs = () => {
@@ -17,18 +16,18 @@ const AboutUs = () => {
       <Grid container spacing={4} alignItems="center">
         {/* Text Section */}
         <Grid item xs={12} md={6}>
-          <TypographyComponent
+          <Typography
             variant="h4"
-            text={heading}
-            color="#34A76C"
-            sx={{ fontWeight: "bold", marginBottom: "20px" }}
-          />
-          <TypographyComponent
+            sx={{ color: "#34A76C", fontWeight: "bold", marginBottom: "20px" }}
+          >
+            {heading}
+          </Typography>
+          <Typography
             variant="body1"
-            text={description}
-            color="textSecondary"
-            sx={{ lineHeight: 1.8 }}
-          />
+            sx={{ color: "textSecondary", lineHeight: 1.8 }}
+          >
+            {description}
+          </Typography>
         </Grid>
 
         {/* Image Section */}

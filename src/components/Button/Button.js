@@ -1,41 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
 
-const CustomButton = ({
+// Re-map caspian button variants to MUI Button variants
+const CASPIAN_TO_MUI_VARIANTS = {
+  primary: 'contained',
+  secondary: 'outlined',
+  tertiary: 'text',
+};
+
+export const CaspianButton = ({
   type = 'button',
-  variant = 'contained', // 'contained', 'outlined', or 'text' for MUI
-  size = 'medium',       // 'small', 'medium', or 'large' for MUI
-  color = 'primary',     // 'primary', 'secondary', 'success', 'error', 'info', 'warning', or 'inherit'
+  variant = 'primary',
+  size = 'medium',
+  color = 'cta',
   isDisabled = false,
   onClick,
-  children,
+  title,
+  children = title,
   className = '',
+  ...rest
 }) => {
   return (
     <Button
+      {...rest}
       type={type}
-      variant={variant}
-      size={size}
-      color={color}
+      variant={CASPIAN_TO_MUI_VARIANTS[variant]} // Map custom variant to MUI variant
+      size={size} // 'small', 'medium', or 'large'
+      color={color} // 'cta', 'danger', etc.
       disabled={isDisabled}
       onClick={onClick}
       className={className}
+      disableRipple
     >
       {children}
     </Button>
   );
 };
 
-CustomButton.propTypes = {
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  color: PropTypes.oneOf(['primary', 'secondary', 'success', 'error', 'info', 'warning', 'inherit']),
-  isDisabled: PropTypes.bool,
-  onClick: PropTypes.func,
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-};
-
-export default CustomButton;
+export default CaspianButton;
