@@ -1,38 +1,82 @@
-import React from "react";
-import { TextField, MenuItem } from "@mui/material";
+import React from 'react';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import PropTypes from 'prop-types';
 
-const ReusableInputField = ({ field, value, onChange }) => {
-  if (field.type === "dropdown") {
-    return (
-      <TextField
-        select
-        fullWidth
-        label={field.label}
+const CustomSelect = ({
+  label,
+  value,
+  onChange,
+  options,
+  fullWidth = true,
+  variant = 'outlined',
+  color = 'primary',
+  size = 'medium',
+  disabled = false,
+  error = false,
+  helperText = '',
+  sx = {},
+  placeholder = '',
+  ...selectProps
+}) => {
+  return (
+    <FormControl
+      fullWidth={fullWidth}
+      variant={variant}
+      color={color}
+      size={size}
+      disabled={disabled}
+      error={error}
+      sx={sx.formControl}
+    >
+      {label && <InputLabel>{label}</InputLabel>}
+      <Select
+        label={label}
         value={value}
         onChange={onChange}
-        variant="outlined"
-        margin="normal"
+        {...selectProps}
+        displayEmpty
+        renderValue={(selected) => {
+          if (!selected) {
+            return <em>{placeholder}</em>;  
+          }
+          return selected;
+        }}
+        sx={sx.select}
       >
-        {field.options.map((option, index) => (
-          <MenuItem key={index} value={option.value}>
+        {options.map((option) => (
+          <MenuItem key={option.value} value={option.value} sx={sx.menuItem}>
             {option.label}
           </MenuItem>
         ))}
-      </TextField>
-    );
-  }
-
-  return (
-    <TextField
-      fullWidth
-      label={field.label}
-      type={field.type}
-      value={value}
-      onChange={onChange}
-      variant="outlined"
-      margin="normal"
-    />
+      </Select>
+      {helperText && (
+        <p style={{ color: error ? 'red' : 'grey', fontSize: '0.75rem', margin: '4px 14px 0' }}>
+          {helperText}
+        </p>
+      )}
+    </FormControl>
   );
 };
 
-export default ReusableInputField;
+CustomSelect.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.any.isRequired,
+  onChange: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.any.isRequired,
+      label: PropTypes.node.isRequired,
+    })
+  ).isRequired,
+  fullWidth: PropTypes.bool,
+  variant: PropTypes.oneOf(['standard', 'outlined', 'filled']),
+  color: PropTypes.oneOf(['primary', 'secondary', 'error', 'info', 'success', 'warning']),
+  size: PropTypes.oneOf(['small', 'medium']),
+  disabled: PropTypes.bool,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  sx: PropTypes.object,
+  placeholder: PropTypes.string, 
+};
+
+export default CustomSelect;
