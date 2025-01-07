@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box } from "@mui/material";
-import TypographyComponent from "../Typography/Typography"; // Import your TypographyComponent
+import { Tabs, Tab, Box, Typography } from "@mui/material";
 
 const TabComponent = ({
   tabs,                      
@@ -41,16 +40,17 @@ const TabComponent = ({
                   alignItems: "center",
                 }}
               >
-                {/* Label with TypographyComponent */}
-                <TypographyComponent
+                {/* Label with MUI Typography */}
+                <Typography
                   variant="body1"
-                  text={tab.label}
                   color={selectedTab === index ? "black" : "text.secondary"}
                   sx={{
                     fontWeight: selectedTab === index ? "bold" : "normal",
                     ...tabStyles,
                   }}
-                />
+                >
+                  {tab.label}
+                </Typography>
                 {/* Active Indicator */}
                 {selectedTab === index && (
                   <Box
