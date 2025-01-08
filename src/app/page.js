@@ -1,14 +1,12 @@
 'use client';
-import { Button } from '@mui/material';
+import { store } from '@/utils/store';
+import { Provider } from 'react-redux';
+import HomePage from './Home/page';
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <main style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <h1>Welcome to Next.js with Redux and Material-UI</h1>
-      <p>This is a basic setup using the app directory and src structure.</p>
-      <Button variant="contained" color="primary">
-        Material-UI Button
-      </Button>
-    </main>
+    <Provider store={store}>
+      <HomePage />
+    </Provider>
   );
 }
