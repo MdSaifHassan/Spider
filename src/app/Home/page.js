@@ -1,68 +1,67 @@
-import CustomAutoComplete from "@/Components/Autocomplete/CustumAutocomplete";
-import options from "@/Components/Autocomplete/option";
-import { fruitOptions } from "@/Components/Dropdwon/data";
-import CustomSelect from "@/Components/Dropdwon/dropdwon";
-import React, { useState } from "react";
+'use client';
+
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import Carousel from "@/components/Carousel/Carousel";
+import homeData from "@/module/home/HomeData";
 
 export default function HomePage() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const renderCarouselItem = (item) => (
+    <img
+      src={item.imageUrl}
+      alt={item.alt}
+      style={{
+        width: "calc(80% + 60px)",
+        height: "280px",
+        objectFit: "cover",
+        borderRadius: "8px",
+        margin: "8px",
+      }}
+    />
+  );
 
-  const handleChange = (event, value) => {
-    setSelectedOption(value);
-  };
-  const [fruit, setFruit] = useState('');
-  const [error, setError] = useState(false);
-
-  const handleChangeDrodwon = (event) => {
-    setFruit(event.target.value);
-    setError(event.target.value === '');
-  };
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Custom AutoComplete Example</h1>
-      <CustomAutoComplete
-        options={options} 
-        // label="Choose an Option"
-        value={selectedOption}
-        onChange={handleChange}
-        variant="outlined"
-        autocompleteSx={{
-          width: "300px",
-        }}
-        textFieldSx={{
-          "& .MuiOutlinedInput-root": {
-            borderRadius: "5px",
-            "&.Mui-focused fieldset": {
-              borderColor: "purple",
+    <Box sx={{ p: 4, mt: 5}}>
+      {/* Heading */}
+      <Typography variant="h4" sx={{
+        fontWeight: "bold", 
+        fontSize: { xs: "20px", sm: "24px", md: "36px" },
+      }}>
+        <span style={{ color: "#34A76C" }}>{homeData.heading}</span> {homeData.subheading}
+      </Typography>
+      <Typography variant="body1" sx={{
+        fontSize: { xs: "14px", sm: "16px" },
+      }}>
+        {homeData.description}
+      </Typography>
+
+      {/* Carousel */}
+      <Carousel
+        items={homeData.carouselItems}
+        renderItem={renderCarouselItem}
+        showButtons={false}
+        settings={{
+          dots: false,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          slidesToShow: 3,
+          centerMode: false,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 2.1,
+              },
             },
-          },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 1,
+              },
+            },
+          ],
         }}
       />
-      <br />
-      <br />
-      <br />
-      <h1>
-      Custom Dropdown Example
-      </h1>
-      <CustomSelect
-        // label="Fruit"
-        placeholder="select Fruit"
-        value={fruit}
-        onChange={handleChangeDrodwon}
-        options={fruitOptions}
-        variant="outlined"
-        color="secondary"
-        size="medium"
-        disabled={false}
-        error={error}
-        helperText={error ? 'Please select a fruit' : ''}
-        sx={{
-          formControl: { marginTop: '16px',width:"300px" },
-          select: { backgroundColor: '#fff' },
-          menuItem: { fontSize: '1rem' },
-        }}
-       
-      />
-    </div>
+    </Box>
   );
 }

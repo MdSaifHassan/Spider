@@ -58,10 +58,10 @@ const Header = () => {
               onClick={() => router.push('/')}
             >
               <Image
-                // src="/Aone-InfoSystem-Logo.png"
+                src="/client.png"
                 alt="Logo"
-                width={90}
-                height={40}
+                width={50}
+                height={50}
               />
             </Box>
 

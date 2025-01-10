@@ -1,7 +1,9 @@
+'use client'
+
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import footerData from '@/module/footer/FooterData';
-// import DropdownComponent from '@/components/FooterDropDown/DropDown';
+// import DropdownComponent from '@/components/DropDown/DropDown';
 
 const Footer = () => {
   const { contact, links, copyright } = footerData;
@@ -55,15 +57,35 @@ const Footer = () => {
         <Grid item xs={12} sm={8}>
           <Grid container spacing={2}>
             {links.map((section, sectionIndex) => (
-              <Grid
+              {/* <Grid
                 item
                 xs={12}
                 sm={4}
                 key={sectionIndex}
                 sx={{ display: { xs: 'block', sm: 'none' } }}
               >
-                {/* <DropdownComponent title={section.title} items={section.items} /> */}
-              </Grid>
+                <DropdownComponent title={section.title} items={section.items}
+                  containerSx={{
+                    borderBottom: '1px solid #DDD',
+                    padding: '10px 0',
+                    cursor: 'pointer',
+                  }}
+                  titleSx={{
+                    fontWeight: 'bold',
+                    fontSize: '16px',
+                    color: '#34A76C',
+                  }}
+                  collapseSx={{
+                    paddingLeft: '10px',
+                    marginTop: '10px'
+                  }}
+                  itemSx={{
+                    fontWeight: 'bold',
+                    color: '#555',
+                    marginBottom: '8px',
+                  }}
+                />
+              </Grid> */}
             ))}
             {links.map((section, sectionIndex) => (
               <Grid

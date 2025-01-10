@@ -1,17 +1,21 @@
 'use client';
-import { store } from '@/utils/store';
-import { Provider } from 'react-redux';
-import HomePage from './Home/page';
-import ModalExamplePage from "./Modal/page";
+
+import AboutUs from "./aboutUs/page";
+import ExploreServices from "./services/page";
+import WhyUs from "./whyUs/page";
+import HomePage from "./home/page";
+import Header from "@/components/Header/Header";
+import Footer from "./footer/page";
 
 export default function Home() {
   return (
-    <Provider store={store}>
-      <HomePage />
-      <ModalExamplePage/>
-
-    </Provider>
-
-
+    <>
+    {/* <Header/> */}
+      <HomePage/>
+      <AboutUs />
+      <WhyUs />
+      <ExploreServices/>
+      <Footer/>
+    </>
   );
 }
