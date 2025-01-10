@@ -1,5 +1,6 @@
 import React from "react";
 import { Autocomplete, TextField, Box } from "@mui/material";
+import { IoIosArrowDown } from "react-icons/io";
 
 const CustomAutoComplete = ({
   options = [],
@@ -22,7 +23,7 @@ const CustomAutoComplete = ({
   textFieldProps = {}, 
   variant = "outlined", 
   disableOverlay = false, 
-  SideIcon=true ,
+  SideIcon=false,
 }) => {
   return (
     <Autocomplete
@@ -35,25 +36,25 @@ const CustomAutoComplete = ({
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
       renderOption={renderOption}
-      disablePortal={disableOverlay} // Disable overlay dropdown
+      disablePortal={disableOverlay} 
+      
       renderInput={(params) => (
         <TextField
           {...params}
           label={label}
           placeholder={placeholder}
           variant={variant}
-          sx={{ ...textFieldSx }} 
+          sx={{ ...textFieldSx}} 
           {...textFieldProps}
         />
       )}
       fullWidth={fullWidth}
       sx={{
-        ...autocompleteSx, // Autocomplete styling
+        ...autocompleteSx,padding:"0px"
       }}
     />
   );
 };
 
 export default CustomAutoComplete;
-
 
