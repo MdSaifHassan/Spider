@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Box, Typography, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import CaspianButton from '@/components/Button/Button';
+import { MdClose } from "react-icons/md";
+import CaspianButton from '../Button/Button';
 
 const CustomModal = ({ open, onClose, title, content, actions, sx, showCloseIcon = false, onSave }) => {
   return (
@@ -13,11 +13,10 @@ const CustomModal = ({ open, onClose, title, content, actions, sx, showCloseIcon
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 400,
           bgcolor: 'background.paper',
-          boxShadow: 24,
-          p: 4,
-          borderRadius: 2,
+          boxShadow: 4,
+          p: 2.5,
+          borderRadius: 1,
           ...sx, 
         }}
       >
@@ -31,12 +30,12 @@ const CustomModal = ({ open, onClose, title, content, actions, sx, showCloseIcon
               color: 'grey.500',
             }}
           >
-            <CloseIcon />
+            <MdClose />
           </IconButton>
         )}
 
         {title && (
-          <Typography variant="h6" component="h2" gutterBottom>
+          <Typography variant="h6" component="h2" gutterBottom mb={5}>
             {title}
           </Typography>
         )}

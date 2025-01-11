@@ -10,12 +10,14 @@ import Footer from "./footer/page";
 export default function Home() {
   return (
     <>
-    {/* <Header/> */}
-      <HomePage/>
+      <Header/>
+      <HomePage />
       <AboutUs />
       <WhyUs />
-      <ExploreServices/>
-      <Footer/>
+      <ExploreServices />
+      {/* <Footer /> */}
     </>
+
+
   );
 }
