@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from "react";
 import { Box, Typography } from "@mui/material";
@@ -7,51 +7,57 @@ import clientReviews from "@/module/client/data";
 
 const ClientCarousel = () => {
     return (
-        <Box sx={{
-            py: 4,
-            px: { xs: 2, sm: 3, md: 4 },
-        }}>
+        <Box
+            sx={{
+                py: 4,
+                px: { xs: 2, sm: 3, md: 1 },
+                maxWidth: "1200px",
+                mx: "auto",
+            }}
+        >
             {/* Section Heading */}
             <Typography
                 variant="h4"
                 sx={{
                     fontWeight: "bold",
                     color: "#34A76C",
-                    fontSize: { xs: "20px", sm: "24px", md: "36px" },
-                    textAlign: "left",
-                    mb: 1,
+                    fontSize: { xs: "24px", sm: "30px", md: "36px" },
+                    mb: 2,
                 }}
             >
                 What Our Client Says
             </Typography>
 
-            {/* Carousel with one card per slide */}
+            {/* Carousel */}
             <Carousel
                 items={clientReviews}
                 renderItem={(item) => (
                     <Box
                         sx={{
-                            height: 300,
-                            mx: "auto",
-                            border: "1px solid #ddd",
-                            backgroundColor: "#fff",
-                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                            borderRadius: "12px",
-                            padding: 3,
                             display: "flex",
+                            flexDirection: { xs: "column", md: "row" },
                             alignItems: "center",
+                            justifyContent: "space-between",
+                            px: { xs: 3, md: 5 },
+                            py: { xs: 2, md: 4 },
+                            border: "1px solid #ddd",
+                            borderRadius: "12px",
+                            backgroundColor: "#fff",
                             position: "relative",
-                            flexDirection: { xs: "column", md: "row" }, 
+                            maxWidth: "1200px",
+                            mx: "auto",
                         }}
                     >
-                        {/* Logo and Name */}
+                        {/* Client Image and Name */}
                         <Box
                             sx={{
                                 display: "flex",
+                                flexDirection: "column",
                                 alignItems: "center",
-                                justifyContent: { xs: "center", md: "flex-start" },
-                                flexDirection: { xs: "column", md: "column" }, 
-                                mb: { xs: 1, md: 0 }, 
+                                justifyContent: "center",
+                                textAlign: "center",
+                                width: { xs: "100%", md: "25%" },
+                                mb: { xs: 2, md: 0 },
                             }}
                         >
                             <Box
@@ -59,10 +65,11 @@ const ClientCarousel = () => {
                                 src={item.image}
                                 alt={item.name}
                                 sx={{
-                                    width: 150,
-                                    height: 150,
+                                    width: { xs: 100, md: 150 },
+                                    height: { xs: 100, md: 150 },
                                     borderRadius: "50%",
                                     objectFit: "cover",
+                                    mb: 2,
                                 }}
                             />
                             <Typography
@@ -70,50 +77,58 @@ const ClientCarousel = () => {
                                 sx={{
                                     fontWeight: "bold",
                                     color: "#333",
-                                    textAlign: { xs: "center", md: "left" }, 
+                                    fontSize: { xs: "16px", md: "18px" },
                                 }}
                             >
                                 {item.name}
                             </Typography>
                         </Box>
 
-                        {/* Quoted Image and Review */}
-                        <Box sx={{ flex: 2, position: "relative", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                        {/* Review Text with Quotes */}
+                        <Box
+                            sx={{
+                                flex: 1,
+                                textAlign: "center",
+                                position: "relative",
+                                px: { xs: 2, md: 4 },
+                            }}
+                        >
+                            {/* Opening Quote */}
                             <Box
                                 component="img"
-                                src="/left-quote 1.png" 
+                                src="/left-quote 1.png"
                                 alt="Quote"
                                 sx={{
                                     position: "absolute",
-                                    top: "-2rem",
-                                    left: "-3rem",
-                                    width: "4.4rem",
-                                    height: "3.9rem",
+                                    top: "-20px",
+                                    left: "-20px",
+                                    width: "40px",
+                                    height: "35px",
                                 }}
                             />
 
                             <Typography
-                                variant="body2"
+                                variant="body1"
                                 sx={{
-                                    textAlign: "center",
                                     color: "#666",
                                     lineHeight: 1.6,
-                                    mt: 1,
+                                    fontSize: { xs: "14px", md: "16px" },
                                 }}
                             >
                                 {item.review}
                             </Typography>
 
+                            {/* Closing Quote */}
                             <Box
                                 component="img"
-                                src="/left-quote 1.png" 
+                                src="/left-quote 1.png"
                                 alt="Closing Quote"
                                 sx={{
                                     position: "absolute",
-                                    bottom: "-3rem",
-                                    right: "0rem",
-                                    width: "4.4rem",
-                                    height: "3.9rem",
+                                    bottom: "-15px",
+                                    right: "10px",
+                                    width: "40px",
+                                    height: "35px",
                                     transform: "rotate(180deg)",
                                 }}
                             />
@@ -122,8 +137,12 @@ const ClientCarousel = () => {
                 )}
                 showButtons={false}
                 settings={{
+                    dots: true,
+                    autoplay: true,
+                autoplaySpeed: 3000,
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    centerMode: false,
                     responsive: [
                         {
                             breakpoint: 768,

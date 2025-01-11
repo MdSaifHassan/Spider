@@ -15,7 +15,7 @@ const ExploreServices = () => {
         <Box
             sx={{
                 py: 4,
-                px: { xs: 2, sm: 3, md: 4 },
+                px: { xs: 2, sm: 3, md: 5 },
             }}
         >
             {/* Title and Slider Buttons */}

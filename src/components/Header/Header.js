@@ -15,11 +15,19 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import CaspianButton from '@/components/Button/Button'; // Import CaspianButton
 import MenuIcon from '@mui/icons-material/Menu';
+import LoginModal from '@/app/Login/page'; // Adjust import if needed
+import SignUpModal from '@/app/SignUp/page'; // Adjust import if needed
+import { Provider } from "react-redux";
+import { store } from "../../utils/store";
+
+
 
 const Header = () => {
   const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -36,6 +44,8 @@ const Header = () => {
 
   return (
     <>
+    <Provider store={store}>
+
       <AppBar
         position="fixed"
         color="transparent"
@@ -57,12 +67,7 @@ const Header = () => {
               sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
               onClick={() => router.push('/')}
             >
-              <Image
-                src="/client.png"
-                alt="Logo"
-                width={50}
-                height={50}
-              />
+              <Image src="/client.png" alt="Logo" width={50} height={50} />
             </Box>
 
             {/* Desktop Links */}
@@ -98,7 +103,7 @@ const Header = () => {
                   borderRadius: '5px',
                   padding: '5px 20px',
                 }}
-                onClick={() => router.push('/login')}
+                onClick={() => setIsLoginOpen(true)} // Open Login Modal
               >
                 Log in
               </CaspianButton>
@@ -111,11 +116,10 @@ const Header = () => {
                   borderRadius: '5px',
                   padding: '5px 20px',
                 }}
-                onClick={() => router.push('/signup')}
+                onClick={() => setIsSignUpOpen(true)} // Open Sign Up Modal
               >
                 Sign Up
               </CaspianButton>
-
             </Box>
 
             {/* Mobile Menu Icon */}
@@ -150,7 +154,7 @@ const Header = () => {
               borderRadius: '5px',
               padding: '5px 20px',
             }}
-            onClick={() => router.push('/login')}
+            onClick={() => setIsLoginOpen(true)} // Open Login Modal
           >
             Log in
           </CaspianButton>
@@ -163,11 +167,10 @@ const Header = () => {
               borderRadius: '5px',
               padding: '5px 20px',
             }}
-            onClick={() => router.push('/signup')}
+            onClick={() => setIsSignUpOpen(true)} // Open Sign Up Modal
           >
             Sign Up
           </CaspianButton>
-
         </Box>
       </AppBar>
 
@@ -204,6 +207,14 @@ const Header = () => {
           </List>
         </Box>
       </Drawer>
+
+      {/* Login Modal */}
+      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
+
+      {/* Sign Up Modal */}
+      <SignUpModal open={isSignUpOpen} onClose={() => setIsSignUpOpen(false)} />
+      //     </Provider>
+
     </>
   );
 };

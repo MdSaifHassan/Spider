@@ -10,7 +10,7 @@ const WhyUs = () => {
       sx={{
         textAlign: "center",
         py: 4,
-        px: { xs: 2, sm: 3, md: 4 }, 
+        px: { xs: 2, sm: 3, md: 1 }, 
       }}
     >
       <Typography

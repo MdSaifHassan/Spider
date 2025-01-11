@@ -2,30 +2,33 @@ import React, { useState } from "react";
 import { Tabs, Tab, Box, Typography } from "@mui/material";
 
 const TabComponent = ({
-  tabs,                      
-  activeTabColor = "#34A76C", 
-  defaultTab = 0,             
-  tabStyles = {},             
-  centerTabs = false,        
+  tabs,
+  activeTabColor = "#34A76C",
+  defaultTab = 0,
+  tabStyles = {},
+  centerTabs = false,
+  onTabChange, // Prop to handle tab change in parent
 }) => {
   const [selectedTab, setSelectedTab] = useState(defaultTab);
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
+    if (onTabChange) {
+      onTabChange(event, newValue); // Notify parent of tab change
+    }
   };
 
   return (
     <Box sx={{ width: "100%" }}>
-      {/* Tabs */}
       <Tabs
         value={selectedTab}
         onChange={handleChange}
-        variant={centerTabs ? "standard" : "scrollable"} 
-        scrollButtons={centerTabs ? "auto" : false} 
-        centered={centerTabs} 
+        variant={centerTabs ? "standard" : "scrollable"}
+        scrollButtons={centerTabs ? "auto" : false}
+        centered={centerTabs}
         sx={{
           "& .MuiTabs-indicator": {
-            display: "none", 
+            display: "none",
           },
         }}
       >
@@ -40,7 +43,6 @@ const TabComponent = ({
                   alignItems: "center",
                 }}
               >
-                {/* Label with MUI Typography */}
                 <Typography
                   variant="body1"
                   color={selectedTab === index ? "black" : "text.secondary"}
@@ -51,7 +53,6 @@ const TabComponent = ({
                 >
                   {tab.label}
                 </Typography>
-                {/* Active Indicator */}
                 {selectedTab === index && (
                   <Box
                     sx={{
