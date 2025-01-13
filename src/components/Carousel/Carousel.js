@@ -14,16 +14,16 @@ const CustomDots = ({ dots, slider }) => (
                 key={index}
                 component="span"
                 sx={{
-                    width: 8,
-                    height: 8,
+                    width: 9,
+                    height: 9,
                     borderRadius: "50%",
-                    border: "1px solid black", 
+                    border: "1px solid black",
                     backgroundColor: dot.props.className.includes("slick-active")
-                        ? "#000" 
-                        : "#fff", 
-                    mx: 0.5, 
+                        ? "#000"
+                        : "#fff",
+                    mx: 0.5,
                     transition: "background-color 0.3s ease",
-                    cursor: "pointer", 
+                    cursor: "pointer",
                 }}
                 onClick={() => slider.slickGoTo(index)} 
             />
@@ -31,21 +31,24 @@ const CustomDots = ({ dots, slider }) => (
     </Box>
 );
 
-const Carousel = ({ items, renderItem, showButtons = true, settings: customSettings }) => {
+const Carousel = ({
+    items,
+    renderItem,
+    showButtons = true,
+    settings: customSettings,
+}) => {
     const sliderRef = React.useRef(null);
 
     const defaultSettings = {
-        dots: !showButtons, 
+        dots: true, 
         infinite: true,
         speed: 500,
         slidesToShow: 6,
         slidesToScroll: 1,
-        customPaging: () => <span />, 
-        appendDots: (dots) =>
-            !showButtons && <CustomDots dots={dots} slider={sliderRef.current} />, 
+        appendDots: (dots) => <CustomDots dots={dots} slider={sliderRef.current} />, 
         responsive: [
             {
-                breakpoint: 1024,
+                breakpoint: 1025,
                 settings: {
                     slidesToShow: 4,
                 },
@@ -63,20 +66,21 @@ const Carousel = ({ items, renderItem, showButtons = true, settings: customSetti
                 },
             },
         ],
-...customSettings, 
-
+        // autoplay: true,
+        // autoplaySpeed: 1000,
+        ...customSettings,
     };
 
     return (
-        <Box sx={{ position: "relative", py: 4 }}>
+        <Box sx={{ position: "relative", py: 2 }}>
             {showButtons && (
                 <Box
                     sx={{
                         position: "absolute",
-                        top: -60, 
+                        top: -60,
                         right: 10,
                         display: "flex",
-                        gap: 1, 
+                        gap: 1,
                         zIndex: 2,
                     }}
                 >
@@ -84,9 +88,9 @@ const Carousel = ({ items, renderItem, showButtons = true, settings: customSetti
                     <IconButton
                         onClick={() => sliderRef.current.slickPrev()}
                         sx={{
-                            background: "#e0e0e0", 
-                            color: "#333", 
-                            "&:hover": { background: "#d6d6d6" }, 
+                            background: "#e0e0e0",
+                            color: "#333",
+                            "&:hover": { background: "#d6d6d6" },
                         }}
                     >
                         <ArrowBackIosNewIcon />
@@ -96,9 +100,9 @@ const Carousel = ({ items, renderItem, showButtons = true, settings: customSetti
                     <IconButton
                         onClick={() => sliderRef.current.slickNext()}
                         sx={{
-                            background: "#34A76C", 
-                            color: "#fff", 
-                            "&:hover": { background: "#34A75C" }, 
+                            background: "#34A76C",
+                            color: "#fff",
+                            "&:hover": { background: "#34A75C" },
                         }}
                     >
                         <ArrowForwardIosIcon />
@@ -109,9 +113,7 @@ const Carousel = ({ items, renderItem, showButtons = true, settings: customSetti
             {/* Slider */}
             <Slider ref={sliderRef} {...defaultSettings}>
                 {items.map((item, index) => (
-                    <Box key={index}>
-                        {renderItem(item)}
-                    </Box>
+                    <Box key={index}>{renderItem(item)}</Box>
                 ))}
             </Slider>
         </Box>

@@ -5,8 +5,8 @@ import { Box, TextField, Typography } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { formValidationSchema } from "../../../utils/formvalidation/ServicesForm";
 import { updateForm } from "../../../utils/slices/formSlice";
-import CustomAutoComplete from "../../../Components/Autocomplete/CustumAutocomplete";
-import CaspianButton from "../../../Components/Button/Button";
+import CustomAutoComplete from "../../../components/Autocomplete/CustumAutocomplete";
+import CaspianButton from "../../../components/Button/Button";
 
 const Form = () => {
   const dispatch = useDispatch();

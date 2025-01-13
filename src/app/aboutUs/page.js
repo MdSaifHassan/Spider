@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import aboutData from "@/module/aboutUs/aboutData";
@@ -8,8 +10,7 @@ const AboutUs = () => {
   return (
     <Box
       sx={{
-        padding: { xs: "20px", md: "50px 100px" }, 
-        backgroundColor: "#FFFFFF",
+        padding: { xs: "20px", md: "50px 40px" },
         position: "relative",
       }}
     >
@@ -18,13 +19,17 @@ const AboutUs = () => {
         <Grid item xs={12} md={6}>
           <Typography
             variant="h4"
-            sx={{ color: "#34A76C", fontWeight: "bold", marginBottom: "20px" }}
+            sx={{
+              color: "#34A76C", fontWeight: "bold", marginBottom: "20px", fontSize: { xs: "20px", sm: "24px", md: "36px" },
+            }}
           >
             {heading}
           </Typography>
           <Typography
             variant="body1"
-            sx={{ color: "textSecondary", lineHeight: 1.8 }}
+            sx={{
+              color: "textSecondary", lineHeight: 1.8, fontSize: { xs: "14px", sm: "16px" },
+            }}
           >
             {description}
           </Typography>
@@ -39,8 +44,8 @@ const AboutUs = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              maxWidth: "25rem", 
-              margin: "0 auto", 
+              maxWidth: "25rem",
+              margin: "0 auto",
             }}
           >
             {/* Decorative Circle Top Left */}
@@ -50,12 +55,12 @@ const AboutUs = () => {
               alt="Top Left Circle"
               sx={{
                 position: "absolute",
-                top: "-1.5rem", 
-                left: "-2.3rem", 
-                width: "4.5rem",
+                top: "-2rem",
+                left: "-3rem",
+                width: "6rem",
                 height: "auto",
                 zIndex: 1,
-                display: { xs: "none", md: "block" }, 
+                display: { xs: "none", md: "block" },
               }}
             />
 
@@ -67,9 +72,9 @@ const AboutUs = () => {
               sx={{
                 width: "100%",
                 height: "auto",
-                borderRadius: "0.5rem", 
-                boxShadow: "0rem 0.25rem 0.625rem rgba(0, 0, 0, 0.1)", 
-                zIndex: 2, 
+                borderRadius: "0.5rem",
+                boxShadow: "0rem 0.25rem 0.625rem rgba(0, 0, 0, 0.1)",
+                zIndex: 2,
               }}
             />
 
@@ -80,12 +85,12 @@ const AboutUs = () => {
               alt="Bottom Right Circle"
               sx={{
                 position: "absolute",
-                bottom: "-1.5rem", 
-                right: "-2.3rem", 
-                width: "4.5rem",
+                bottom: "-2rem",
+                right: "-3rem",
+                width: "6rem",
                 height: "auto",
                 zIndex: 1,
-                display: { xs: "none", md: "block" }, 
+                display: { xs: "none", md: "block" },
               }}
             />
           </Box>
