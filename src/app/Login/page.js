@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Box,  Link } from '@mui/material';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import CustomTextField from '../../Components/TextField/Textfield';
-import CustomModal from '../../Components/Modal/modal';
-import CaspianButton from '../../Components/Button/Button';
+import CustomTextField from '../../components/TextField/Textfield';
+import CustomModal from '../../components/Modal/modal';
+import CaspianButton from '../../components/Button/Button';
 import validationSchema from '../../utils/formvalidation/LoginValidation';
 import { loginUser } from '../../utils/slices/formSlice'; 
 
