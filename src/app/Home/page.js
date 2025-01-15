@@ -20,7 +20,6 @@ export default function HomePage() {
     />
   );
 
-function page() {
   return (
     <Provider store={store}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -35,7 +34,7 @@ function page() {
               </Typography>
             </Box>
 
-            {/* Carousel Section */}
+            {/ Carousel Section /}
             <Box className={styles.carouselSection}>
               <Carousel
                 items={homeData.carouselItems}
