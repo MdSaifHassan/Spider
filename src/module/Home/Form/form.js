@@ -81,7 +81,7 @@ const Form = () => {
           label="Select Date"
           value={formik.values.date ? new Date(formik.values.date) : null}
           onChange={(value) => handleFieldChange("date", value)}
-          minDate={new Date()} 
+          minDate={new Date()}
           slotProps={{
             textField: {
               fullWidth: true,
@@ -123,10 +123,10 @@ const Form = () => {
       </Box>
 
       <CaspianButton
-        fullWidth
+        size="medium"
         type="submit"
         title="Submit"
-        sx={{ background: "#34A76C", color: "#fff" }}
+        sx={{ background: "#34A76C", color: "#fff", padding: '0.4rem 5rem', }}
       />
     </Box>
   );

@@ -9,9 +9,9 @@ import { Provider } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { store } from "@/utils/store";
-import styles from "./HomePage.module.scss";
+import styles from "./HomeSection.module.scss";
 
-export default function HomePage() {
+export default function HomeSection() {
   const renderCarouselItem = (item) => (
     <img
       src={item.imageUrl}

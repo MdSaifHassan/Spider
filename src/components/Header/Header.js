@@ -245,8 +245,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import CaspianButton from '@/components/Button/Button';
 import { CgMenuRight } from 'react-icons/cg';
-import LoginModal from '@/app/Login/page';
-import SignUpModal from '@/app/SignUp/page';
+import LoginModal from '@/module/Login/page';
+import SignUpModal from '@/module/SignUp/page';
 import { Provider } from 'react-redux';
 import { store } from '../../utils/store';
 
