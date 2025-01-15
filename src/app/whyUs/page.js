@@ -1,7 +1,9 @@
+
+
 'use client'
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material"; 
-import FeatureCard from "@/components/Card/Card"; 
+import { Box, Grid, Typography } from "@mui/material";
+import FeatureCard from "@/components/Card/Card";
 import data from "@/module/whyUs/WhyUsData";
 
 const WhyUs = () => {
@@ -10,7 +12,7 @@ const WhyUs = () => {
       sx={{
         textAlign: "center",
         py: 4,
-        px: { xs: 2, sm: 3, md: 1 }, 
+        px: { xs: 2, sm: 3, md: 2 },
       }}
     >
       <Typography
@@ -26,10 +28,10 @@ const WhyUs = () => {
       </Typography>
       <Grid
         container
-        spacing={{ xs: 1, sm: 1 }} 
+        spacing={{ xs: 2, sm: 8 }}
         justifyContent="center"
       >
-        {data.items.map((item, index) => ( 
+        {data.items.map((item, index) => (
           <Grid
             item
             xs={6}
@@ -39,19 +41,26 @@ const WhyUs = () => {
             sx={{ textAlign: "center" }}
           >
             <FeatureCard
+              showImage={true} 
               image={item.image}
               sx={{
-                width: { xs: 160, sm: 220, md: 220 }, 
-                height: { xs: 140, sm: 155 }, 
+                width: { xs: 160, sm: 220, md: 220 },
+                height: { xs: 140, sm: 155 },
                 boxShadow: 2,
                 backgroundColor: "#EEEEEE",
                 borderRadius: "10px",
                 transition: "transform 0.3s",
                 "&:hover": { transform: "scale(1.05)" },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
               boxSx={{
-                width: { xs: 50, sm: 60, md: 65 }, 
-                height: { xs: 45, sm: 55, md: 60 },
+                width: { xs: 55, sm: 65, md: 75 },
+                height: { xs: 50, sm: 60, md: 70 },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             />
             <Typography
@@ -60,7 +69,7 @@ const WhyUs = () => {
                 mt: 2,
                 mb: 2,
                 color: "#000",
-                fontSize: { xs: "14px", sm: "16px" }, 
+                fontSize: { xs: "14px", sm: "16px" },
               }}
             >
               {item.title}

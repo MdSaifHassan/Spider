@@ -15,7 +15,7 @@ const ExploreServices = () => {
         <Box
             sx={{
                 py: 4,
-                px: { xs: 2, sm: 3, md: 5 },
+                px: { xs: 2, sm: 3, md: 2 },
             }}
         >
             {/* Title and Slider Buttons */}
@@ -51,9 +51,10 @@ const ExploreServices = () => {
                     dots: isSmallDevice,
                 }}
                 renderItem={(item) => (
-                    <Box sx={{ textAlign: "center" }}>
+                    <Box sx={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                         {/* Feature Card */}
                         <FeatureCard
+                            showImage={true} 
                             image={item.image}
                             sx={{
                                 width: { xs: 100, sm: 140, md: 160 }, 
@@ -61,11 +62,17 @@ const ExploreServices = () => {
                                 boxShadow: 2,
                                 borderRadius: "10px",
                                 transition: "transform 0.3s",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                                 "&:hover": { transform: "scale(1.05)" },
                             }}
                             boxSx={{
                                 width: { xs: 60, sm: 80, md: 100 }, 
                                 height: { xs: 40, sm: 60, md: 70 }, 
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
                             }}
                         />
 

@@ -29,8 +29,17 @@ const SignUpModal = ({ open, onClose }) => {
   return (
     <CustomModal
       showCloseIcon={false}
-      sx={{ width: "600px" }}
-      open={open}
+      sx={{
+        width: "600px",
+        "@media (max-width: 768px)": {
+          width: "90%",  // 90% of the screen width on smaller devices
+        },
+        "@media (max-width: 480px)": {
+          width: "95%",  // 95% of the screen width on very small devices
+        },  
+      }}  
+        
+          open={open}
       onClose={onClose}
       title="Sign Up"
       variant="h5"
@@ -99,8 +108,8 @@ const SignUpModal = ({ open, onClose }) => {
               variant="outlined"
               onClick={onClose}
               sx={{
-                color: '#388e3c',
-                ':hover': { backgroundColor: '#388e3c', color: '#fff' },
+                color: 'red',
+                ':hover': { backgroundColor: 'red', color: '#fff' },
               }}
             >
               Cancel
