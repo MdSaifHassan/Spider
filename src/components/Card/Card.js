@@ -37,7 +37,6 @@ const FeatureCard = ({
       }}
     >
       <CardContent sx={{ flexDirection: "row", display: "flex" }}>
-        {/* {/ Image /} */}
         {showImage && image && (
           <Box
             component="img"
@@ -49,14 +48,12 @@ const FeatureCard = ({
           />
         )}
 
-        {/* {/ Icon /} */}
         {showIcon && (
           <Box mb={2} >
             <Box  sx={{ mr: 2 , ...iconsx}}>{icon}</Box>
           </Box>
         )}
 
-        {/* {/ Title /} */}
         <Box>
           {showTitle && (
             <Box mb={2}>
@@ -64,7 +61,6 @@ const FeatureCard = ({
             </Box>
           )}
 
-          {/* {/ Description /} */}
           {showDescription && (
             <Box mb={2}>
               <Typography variant="body2" color="textSecondary">
@@ -73,7 +69,6 @@ const FeatureCard = ({
             </Box>
           )}
 
-          {/* {/ Button /} */}
           {showButton && (
             <Box mt={2}>
               <CaspianButton
@@ -86,7 +81,6 @@ const FeatureCard = ({
           )}
         </Box>
 
-        {/* {/ Children /} */}
         {children}
       </CardContent>
     </Card>

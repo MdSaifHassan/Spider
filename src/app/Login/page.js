@@ -40,6 +40,8 @@ const LoginModal = ({ open, onClose }) => {
       open={open}
       onClose={onClose}
       title="Login"
+      variant="h5"
+      fontWeight="bold"
       content={
         <form onSubmit={formik.handleSubmit}>
           <CustomTextField

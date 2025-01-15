@@ -34,7 +34,7 @@ export default function HomePage() {
               </Typography>
             </Box>
 
-            {/* Carousel Section */}
+            {/ Carousel Section /}
             <Box className={styles.carouselSection}>
               <Carousel
                 items={homeData.carouselItems}
