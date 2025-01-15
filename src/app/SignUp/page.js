@@ -33,6 +33,8 @@ const SignUpModal = ({ open, onClose }) => {
       open={open}
       onClose={onClose}
       title="Sign Up"
+      variant="h5"
+       fontWeight="bold"
       content={
         <form onSubmit={formik.handleSubmit}>
           <CustomTextField

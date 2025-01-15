@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
@@ -25,12 +26,14 @@ const Form = () => {
   });
 
   const handleFieldChange = (field, value) => {
-    const serializedValue = field === "date" || field === "time" ? value?.toISOString() : value;
+    const serializedValue =
+      field === "date" || field === "time" ? value?.toISOString() : value;
     formik.setFieldValue(field, serializedValue);
     dispatch(updateForm({ [field]: serializedValue }));
   };
 
-  const getError = (field) => Boolean(formik.touched[field] && formik.errors[field]);
+  const getError = (field) =>
+    Boolean(formik.touched[field] && formik.errors[field]);
 
   return (
     <Box
@@ -50,10 +53,10 @@ const Form = () => {
 
       <Box mb={2}>
         <CustomAutoComplete
-          options={categories}
+          options={categories} 
           label="Select Category"
           value={formik.values.category}
-          onChange={(e, value) => handleFieldChange("category", value)}
+          onChange={(e, value) => handleFieldChange("category", value?.value)}
           placeholder="Select a category"
           textFieldProps={{
             error: getError("category"),
@@ -64,10 +67,10 @@ const Form = () => {
 
       <Box mb={2}>
         <CustomAutoComplete
-          options={services}
+          options={services} // No change here
           label="Select Services"
           value={formik.values.service}
-          onChange={(e, value) => handleFieldChange("service", value)}
+          onChange={(e, value) => handleFieldChange("service", value?.value)} // Adjust value handling
           placeholder="Select a service"
           textFieldProps={{
             error: getError("service"),
@@ -81,7 +84,7 @@ const Form = () => {
           label="Select Date"
           value={formik.values.date ? new Date(formik.values.date) : null}
           onChange={(value) => handleFieldChange("date", value)}
-          minDate={new Date()} 
+          minDate={new Date()}
           slotProps={{
             textField: {
               fullWidth: true,
