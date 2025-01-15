@@ -25,6 +25,7 @@
     "react-icons": "^5.4.0",
     "react-redux": "^9.2.0",
     "react-slick": "^0.30.3",
+    "sass": "^1.83.4",
     "slick-carousel": "^1.8.1",
     "yup": "^1.6.1"
   }

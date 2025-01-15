@@ -4,7 +4,7 @@ import { Modal, Box, Typography, IconButton } from '@mui/material';
 import { MdClose } from "react-icons/md";
 import CaspianButton from '../Button/Button';
 
-const CustomModal = ({ open, onClose, title, content, actions, sx, showCloseIcon = false, onSave }) => {
+const CustomModal = ({ open, onClose, title, content, actions, sx, showCloseIcon = false, onSave, variant,fontWeight }) => {
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -35,7 +35,7 @@ const CustomModal = ({ open, onClose, title, content, actions, sx, showCloseIcon
         )}
 
         {title && (
-          <Typography variant="h6" component="h2" gutterBottom mb={5}>
+          <Typography variant={variant} component="h2" gutterBottom mb={5} fontWeight={fontWeight}>
             {title}
           </Typography>
         )}

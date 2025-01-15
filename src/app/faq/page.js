@@ -15,10 +15,9 @@ const FAQSection = () => {
   return (
     <Box
       sx={{
-        maxWidth: "1200px",
-        mx: "auto",
-        py: 4,
-        px: { xs: 2, md: 1 },
+        py: 2,
+        px: { xs: 2, sm: 3, md: 2 },
+        position: "relative",
       }}
     >
       {/* Heading */}
@@ -27,7 +26,8 @@ const FAQSection = () => {
         sx={{
           fontWeight: "bold",
           color: "#34A76C",
-          mb: 4,
+          fontSize: { xs: "20px", sm: "24px", md: "36px"},
+          mb: 2,
         }}
       >
         Have Any Question?
@@ -40,7 +40,7 @@ const FAQSection = () => {
         activeTabColor="#34A76C"
         centerTabs
         tabStyles={{
-          fontSize: {xs: "15px", md: "18px"},
+          fontSize: {xs: "14px", md: "18px"},
         }}
         onTabChange={handleTabChange} // Pass the handler for tab change
       />
@@ -51,18 +51,19 @@ const FAQSection = () => {
           <Grid item xs={12} md={6} key={index}>
             <Box
               sx={{
-                px: 5,
+                px: 1,
+                mt: 1.5
               }}
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: "bold", mb: 1, color: "#333" }}
+                sx={{ fontWeight: "bold", color: "#333", fontSize: { xs: "16px", sm: "20px" } }}
               >
                 {item.question}
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: "#666", lineHeight: 1.6 }}
+                sx={{ color: "#666", lineHeight: 1.6, fontSize: { xs: "14px", sm: "16px" } }}
               >
                 {item.answer}
               </Typography>

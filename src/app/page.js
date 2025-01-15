@@ -9,21 +9,43 @@ import Footer from "./footer/page";
 import Subscription from "./subscription/page";
 import ClientCarousel from "./client/page";
 import FAQSection from "./faq/page";
+import Container from "@/components/Container/Container";
 
 export default function Home() {
   return (
-    <>
+    
+    <div>
+      <Container>
       <Header/>
-      <HomePage />
-      <AboutUs />
-      <WhyUs />
-      <ExploreServices />
-      <ClientCarousel/>
-      <FAQSection/>
-      <Subscription/>
-      <Footer/>
-    </>
+      {/* Main Content */}
+        <div id="home">
+          <HomePage />
+        </div>
 
+        <div id="about">
+          <AboutUs />
+          <WhyUs/>
+        </div>
 
+        <div id="services">
+          <ExploreServices />
+        </div>
+
+        <div id="testimonials">
+          <ClientCarousel />
+        </div>
+
+        <div id="faq">
+          <FAQSection />
+        </div>
+
+        <div id="contact">
+          <Subscription />
+        </div>
+
+      </Container>
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }
