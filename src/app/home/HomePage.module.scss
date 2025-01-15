@@ -1,0 +1,175 @@
+/* Main Container */
+.mainContainer {
+  position: relative;
+  height: 30rem;
+  overflow: visible;
+  margin-top: 8rem;
+}
+
+/* Background Section */
+.backgroundSection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Text Section */
+.textSection {
+  padding: 16px;
+
+  .heading {
+    font-weight: bold;
+    font-size: 38px;
+    color: black;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+    margin-bottom: 8px;
+
+    span {
+      color: #34a76c;
+    }
+  }
+
+  .description {
+    font-size: 16px;
+    color: black;
+  }
+}
+
+/* Form Section */
+.formContainer {
+  position: absolute;
+  top: 40%;
+  left: 82%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: rgba(240, 240, 240, 0.9);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+/* Carousel Section */
+.carouselSection {
+  display: block; 
+}
+
+.carouselItem {
+  width: calc(80% + 70px);
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 8px;
+}
+
+/* Media Queries */
+
+/* For screens larger than 600px but smaller than 960px (e.g., tablets/iPads) */
+@media (max-width: 960px) and (min-width: 601px) {
+  .mainContainer {
+    height: 32rem; 
+    overflow: visible;
+    margin-top: 6rem;
+  }
+
+  .backgroundSection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .textSection {
+    padding-right: 380px;
+
+    .heading {
+      font-size: 36px; 
+    }
+
+    .description {
+      font-size: 16px; 
+    }
+  }
+
+  .formContainer {
+    position: absolute;
+    top: 52%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background: rgba(240, 240, 240, 0.9);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    width: 80%;
+    box-sizing: border-box;
+  }
+
+  .carouselSection {
+    display: block; 
+  }
+
+  .carouselItem {
+    width: calc(80% + 65px);
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 8px;
+  }
+}
+
+/* For screens smaller than 600px (mobile view) */
+@media (max-width: 600px) {
+  .mainContainer {
+    height: auto;
+    overflow: hidden;
+    margin-top: 6rem;
+    margin-bottom: 1rem;
+  }
+
+  .backgroundSection {
+    position: static;
+    height: auto;
+    z-index: auto;
+  }
+
+  .textSection {
+    margin-bottom: 16px;
+
+    .heading {
+      font-size: 20px;
+    }
+
+    .description {
+      font-size: 14px;
+    }
+  }
+
+  .formContainer {
+    position: static;
+    top: unset;
+    left: unset;
+    transform: none;
+    margin: 0 auto;
+    box-shadow: none;
+    padding: 16px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .carouselSection {
+    display: none; 
+  }
+
+  .carouselItem {
+    display: none; 
+  }
+}

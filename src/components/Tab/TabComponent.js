@@ -68,7 +68,10 @@ const TabComponent = ({
             sx={{
               minWidth: "auto",
               textTransform: "none",
-              padding: "8px 16px",
+              padding: "8px 20px",
+              '@media (max-width: 600px)': {
+                padding: '6px 8px',
+              },
             }}
           />
         ))}
