@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box,  Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import CustomTextField from '../../components/TextField/Textfield';
 import CustomModal from '../../components/Modal/modal';
 import CaspianButton from '../../components/Button/Button';
 import validationSchema from '../../utils/formvalidation/LoginValidation';
-import { loginUser } from '../../utils/slices/formSlice'; 
+import { loginUser } from '../../utils/slices/formSlice';
 
 const LoginModal = ({ open, onClose }) => {
   const dispatch = useDispatch();
@@ -27,8 +27,16 @@ const LoginModal = ({ open, onClose }) => {
 
   return (
     <CustomModal
-     showCloseIcon={false}
-      sx={{ width: "600px" }}
+      showCloseIcon={false}
+      sx={{
+        width: "600px",
+        "@media (max-width: 768px)": {
+          width: "90%",  // 90% of the screen width on smaller devices
+        },
+        "@media (max-width: 480px)": {
+          width: "95%",  // 95% of the screen width on very small devices
+        },
+      }}
       open={open}
       onClose={onClose}
       title="Login"
@@ -58,18 +66,18 @@ const LoginModal = ({ open, onClose }) => {
           />
 
           <Box sx={{ display: 'flex', mb: 2 }} gap={2}>
-            <Link href="#" underline="hover"  color="gray" variant="body2"  
-             sx={{
-                ':hover': { color:'#388e3c', },
-               
+            <Link href="#" underline="hover" color="gray" variant="body2"
+              sx={{
+                ':hover': { color: '#388e3c', },
+
               }}>
               Forgot Password?
             </Link>
             <Link href="#" underline="hover" color="gray" variant="body2"
-            sx={{
-              ':hover': {color:'#388e3c', },
-             
-            }}
+              sx={{
+                ':hover': { color: '#388e3c', },
+
+              }}
             >
               Don't have an account? Sign Up
             </Link>
@@ -80,7 +88,7 @@ const LoginModal = ({ open, onClose }) => {
               type="submit"
               variant="outlined"
               sx={{
-                color:'#388e3c',
+                color: '#388e3c',
                 ':hover': { backgroundColor: '#388e3c', color: '#fff' },
               }}
             >
@@ -89,11 +97,11 @@ const LoginModal = ({ open, onClose }) => {
             <CaspianButton
               variant="outlined"
               onClick={onClose}
-              
+
               sx={{
-                 color:'#388e3c',
-                ':hover': { backgroundColor: '#388e3c', color: '#fff' },
-               
+                color: 'red',
+                ':hover': { backgroundColor: 'red', color: '#fff' },
+
               }}
             >
               Cancel

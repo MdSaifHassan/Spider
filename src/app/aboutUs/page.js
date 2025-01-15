@@ -10,7 +10,8 @@ const AboutUs = () => {
   return (
     <Box
       sx={{
-        padding: { xs: "20px", md: "50px 40px" },
+        py: 2,
+        px: { xs: 2, sm: 3, md: 2 },
         position: "relative",
       }}
     >
@@ -44,7 +45,7 @@ const AboutUs = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              maxWidth: "25rem",
+              maxWidth: "24rem",
               margin: "0 auto",
             }}
           >

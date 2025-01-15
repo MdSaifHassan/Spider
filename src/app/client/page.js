@@ -9,10 +9,10 @@ const ClientCarousel = () => {
     return (
         <Box
             sx={{
-                py: 4,
-                px: { xs: 2, sm: 3, md: 1 },
-                maxWidth: "1200px",
-                mx: "auto",
+                py: 2,
+                px: { xs: 2, sm: 3, md: 2 },
+                position: "relative",
+
             }}
         >
             {/* Section Heading */}
@@ -21,7 +21,7 @@ const ClientCarousel = () => {
                 sx={{
                     fontWeight: "bold",
                     color: "#34A76C",
-                    fontSize: { xs: "24px", sm: "30px", md: "36px" },
+                    fontSize: { xs: "20px", sm: "30px", md: "36px" },
                     mb: 2,
                 }}
             >
@@ -38,13 +38,13 @@ const ClientCarousel = () => {
                             flexDirection: { xs: "column", md: "row" },
                             alignItems: "center",
                             justifyContent: "space-between",
-                            px: { xs: 3, md: 5 },
+                            px: { xs: 1, md: 2 },
                             py: { xs: 2, md: 4 },
-                            border: "1px solid #ddd",
+                            border: { xs: "none", md: "1px solid #ddd" },
                             borderRadius: "12px",
                             backgroundColor: "#fff",
                             position: "relative",
-                            maxWidth: "1200px",
+                            maxWidth: "100%",
                             mx: "auto",
                         }}
                     >
@@ -69,7 +69,6 @@ const ClientCarousel = () => {
                                     height: { xs: 100, md: 150 },
                                     borderRadius: "50%",
                                     objectFit: "cover",
-                                    mb: 2,
                                 }}
                             />
                             <Typography
@@ -100,10 +99,10 @@ const ClientCarousel = () => {
                                 alt="Quote"
                                 sx={{
                                     position: "absolute",
-                                    top: "-20px",
-                                    left: "-20px",
-                                    width: "40px",
-                                    height: "35px",
+                                    top: { xs: "-10px", md: "-20px" },
+                                    left: { xs: "-5px", md: "-20px" },
+                                    width: { xs: "20px", md: "40px" },
+                                    height: { xs: "20px", md: "35px" },
                                 }}
                             />
 
@@ -125,10 +124,10 @@ const ClientCarousel = () => {
                                 alt="Closing Quote"
                                 sx={{
                                     position: "absolute",
-                                    bottom: "-15px",
-                                    right: "10px",
-                                    width: "40px",
-                                    height: "35px",
+                                    bottom: { xs: "-10px", md: "-15px" },
+                                    right: { xs: "5px", md: "10px" },
+                                    width: { xs: "20px", md: "40px" },
+                                    height: { xs: "20px", md: "35px" },
                                     transform: "rotate(180deg)",
                                 }}
                             />
@@ -139,7 +138,7 @@ const ClientCarousel = () => {
                 settings={{
                     dots: true,
                     autoplay: true,
-                autoplaySpeed: 3000,
+                    autoplaySpeed: 3000,
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     centerMode: false,
