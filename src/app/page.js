@@ -3,12 +3,10 @@
 import AboutUs from "../module/aboutUs/page";
 import ExploreServices from "../module/services/page";
 import WhyUs from "../module/whyUs/page";
-import Footer from "../module/footer/page";
 import Subscription from "../module/subscription/page";
 import ClientCarousel from "../module/client/page";
 import FAQSection from "../module/faq/page";
 import HomeSection from "../module/home/page";
-import Header from "../components/Header/Header";
 
 export default function Home() {
   return (
