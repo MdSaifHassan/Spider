@@ -2,14 +2,14 @@
 
 import React, { useState } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import TabComponent from "@/components/Tab/TabComponent"; // Import your TabComponent
-import faqData from "@/module/faq/faqData"; // Import FAQ data
+import faqData from "@/src/module/faq/faqData";
+import TabComponent from "@/src/components/Tab/TabComponent";
 
 const FAQSection = () => {
-  const [selectedTab, setSelectedTab] = useState(0); // State to track selected tab
+  const [selectedTab, setSelectedTab] = useState(0);
 
   const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue); // Update selected tab
+    setSelectedTab(newValue);
   };
 
   return (
@@ -26,23 +26,22 @@ const FAQSection = () => {
         sx={{
           fontWeight: "bold",
           color: "#34A76C",
-          fontSize: { xs: "20px", sm: "24px", md: "36px"},
+          fontSize: { xs: "20px", sm: "24px", md: "36px" },
           mb: 2,
         }}
       >
         Have Any Question?
       </Typography>
 
-      {/* TabComponent */}
       <TabComponent
         tabs={faqData}
         defaultTab={0}
         activeTabColor="#34A76C"
         centerTabs
         tabStyles={{
-          fontSize: {xs: "14px", md: "18px"},
+          fontSize: { xs: "14px", md: "18px" },
         }}
-        onTabChange={handleTabChange} // Pass the handler for tab change
+        onTabChange={handleTabChange}
       />
 
       {/* FAQ Content */}

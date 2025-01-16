@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import footerData from '@/module/footer/FooterData';
-import DropdownComponent from '@/components/Dropdwon/footerDropDown';
+import footerData from '@/src/module/footer/FooterData';
+import FooterDropdown from '@/src/components/Dropdown/footerDropDown';
 
 const Footer = () => {
   const { contact, links, copyright } = footerData;
@@ -46,7 +46,7 @@ const Footer = () => {
             {/* Social Icons */}
             <Box
               sx={{
-                display: { xs: 'flex', sm: 'none' }, // Show only on small screens
+                display: { xs: 'flex', sm: 'none' },
                 gap: '10px',
               }}
             >
@@ -90,7 +90,7 @@ const Footer = () => {
           {/* Social Icons for larger screens */}
           <Box
             sx={{
-              display: { xs: 'none', sm: 'flex' }, // Show only on larger screens
+              display: { xs: 'none', sm: 'flex' },
               gap: '10px',
               marginTop: '20px',
             }}
@@ -127,9 +127,9 @@ const Footer = () => {
                 xs={12}
                 sm={4}
                 key={sectionIndex}
-                sx={{ display: { xs: 'block', sm: 'none' } }} // Show dropdowns on small screens
+                sx={{ display: { xs: 'block', sm: 'none' } }}
               >
-                <DropdownComponent
+                <FooterDropdown
                   title={section.title}
                   items={section.items}
                   containerSx={{
@@ -159,7 +159,7 @@ const Footer = () => {
                 item
                 xs={4}
                 key={sectionIndex}
-                sx={{ display: { xs: 'none', sm: 'block' } }} // Show grid on larger screens
+                sx={{ display: { xs: 'none', sm: 'block' } }}
               >
                 <Typography
                   variant="h6"

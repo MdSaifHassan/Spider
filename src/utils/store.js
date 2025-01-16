@@ -4,7 +4,7 @@ import addressReducer from "./slices/addresSlice";
 
 export const store = configureStore({
   reducer: {
-    form: formReducer, // Keep a unique key for this reducer
-    address: addressReducer, // Use a unique key for this reducer
+    form: formReducer, 
+    address: addressReducer, 
   },
 });

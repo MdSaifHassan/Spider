@@ -2,9 +2,9 @@
 
 import React from "react";
 import { Box, Typography, Grid, useMediaQuery, useTheme } from "@mui/material";
-import Carousel from "@/components/Carousel/Carousel";
-import FeatureCard from "@/components/Card/Card";
-import servicesData from "@/module/services/servicesData";
+import servicesData from "@/src/module/services/servicesData";
+import FeatureCard from "@/src/components/Card/Card";
+import Carousel from "@/src/components/Carousel/Carousel";
 
 const ExploreServices = () => {
     const theme = useTheme();
@@ -43,7 +43,6 @@ const ExploreServices = () => {
                 </Grid>
             </Grid>
 
-            {/* Carousel */}
             <Carousel
                 items={servicesData.items} 
                 showButtons={!isSmallDevice} 

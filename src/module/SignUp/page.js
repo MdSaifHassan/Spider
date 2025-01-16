@@ -6,21 +6,22 @@ import { useDispatch } from 'react-redux';
 import CustomTextField from '../../components/TextField/Textfield';
 import CustomModal from '../../components/Modal/modal';
 import CaspianButton from '../../components/Button/Button';
-import validationSchema from '../../utils/formvalidation/LoginValidation';
-import { loginUser } from '../../utils/slices/formSlice';
+import validationSchema from '../../utils/formvalidation/SignupValidation';
+import { registerUser } from '../../utils/slices/formSlice';
 
-const LoginModal = ({ open, onClose }) => {
+const SignUpModal = ({ open, onClose }) => {
   const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
+      confirmPassword: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      dispatch(loginUser(values))
-      console.log('Login Successful:', values);
+      dispatch(registerUser(values));
+      console.log('Sign Up Successful:', values);
       onClose();
     },
   });
@@ -31,26 +32,27 @@ const LoginModal = ({ open, onClose }) => {
       sx={{
         width: "600px",
         "@media (max-width: 768px)": {
-          width: "90%",  // 90% of the screen width on smaller devices
+          width: "90%",  
         },
         "@media (max-width: 480px)": {
-          width: "95%",  // 95% of the screen width on very small devices
-        },
-      }}
-      open={open}
+          width: "95%",  
+        },  
+      }}  
+        
+          open={open}
       onClose={onClose}
-      title="Login"
+      title="Sign Up"
       variant="h5"
-      fontWeight="bold"
+       fontWeight="bold"
       content={
         <form onSubmit={formik.handleSubmit}>
           <CustomTextField
-            label="Username"
-            name="username"
-            value={formik.values.username}
+            label="Email"
+            name="email"
+            value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched.username && Boolean(formik.errors.username)}
+            error={formik.touched.email && Boolean(formik.errors.email)}
             fullWidth
             sx={{ mb: 2 }}
           />
@@ -67,21 +69,27 @@ const LoginModal = ({ open, onClose }) => {
             sx={{ mb: 2 }}
           />
 
+          <CustomTextField
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+
           <Box sx={{ display: 'flex', mb: 2 }} gap={2}>
-            <Link href="#" underline="hover" color="gray" variant="body2"
-              sx={{
-                ':hover': { color: '#388e3c', },
-
-              }}>
-              Forgot Password?
-            </Link>
-            <Link href="#" underline="hover" color="gray" variant="body2"
-              sx={{
-                ':hover': { color: '#388e3c', },
-
-              }}
+            <Link
+              href="#"
+              underline="hover"
+              color="gray"
+              variant="body2"
+              sx={{ ':hover': { color: '#388e3c' } }}
             >
-              Don't have an account? Sign Up
+              Already have an account? Login
             </Link>
           </Box>
 
@@ -94,16 +102,14 @@ const LoginModal = ({ open, onClose }) => {
                 ':hover': { backgroundColor: '#388e3c', color: '#fff' },
               }}
             >
-              Login
+              Sign Up
             </CaspianButton>
             <CaspianButton
               variant="outlined"
               onClick={onClose}
-
               sx={{
                 color: 'red',
                 ':hover': { backgroundColor: 'red', color: '#fff' },
-
               }}
             >
               Cancel
@@ -115,9 +121,9 @@ const LoginModal = ({ open, onClose }) => {
   );
 };
 
-LoginModal.propTypes = {
+SignUpModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default LoginModal;
+export default SignUpModal;

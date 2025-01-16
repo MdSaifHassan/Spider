@@ -1,13 +1,14 @@
+'use client'
 import React, { useState } from "react";
 import { Box, Grid, Typography, Divider, Button } from "@mui/material";
-import FeatureCard from "../../Components/Card/Card";
 import addressData from "./addressData";
 import mechanicData from "./mechanicData";
-import CaspianButton from "../../Components/Button/Button";
 import { FaRegDotCircle } from "react-icons/fa";
 import AddAddressPage from "../../module/Address/AddressBackdrop";
 import { Provider } from "react-redux";
-import { store } from "../../utils/store";
+import { store } from "@/src/utils/store";
+import CaspianButton from "@/src/components/Button/Button";
+import FeatureCard from "@/src/components/Card/Card";
 
 const SelectAddressPage = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);

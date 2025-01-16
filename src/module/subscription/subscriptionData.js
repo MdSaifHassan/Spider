@@ -1,8 +1,7 @@
-// subscriptionData.js
 const subscriptionData = [
     {
         id: 1,
-        image: "/envelop.png", // Update the path to the correct image URL
+        image: "/envelop.png", 
         title: "Subscribe To Get Latest News",
         description: "Enter your email address to get our latest news.",
     },

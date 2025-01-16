@@ -15,9 +15,9 @@ const FeatureCard = ({
   buttonText = "",
   isSelected = false,
   onButtonClick,
-  image = null, 
-  showImage = false, 
-  boxSx = {} ,
+  image = null,
+  showImage = false,
+  boxSx = {},
   variant,
   iconsx
 }) => {
@@ -43,14 +43,14 @@ const FeatureCard = ({
             src={image}
             alt="Card-Img"
             sx={{
-              ...boxSx, 
+              ...boxSx,
             }}
           />
         )}
 
         {showIcon && (
           <Box mb={2} >
-            <Box  sx={{ mr: 2 , ...iconsx}}>{icon}</Box>
+            <Box sx={{ mr: 2, ...iconsx }}>{icon}</Box>
           </Box>
         )}
 

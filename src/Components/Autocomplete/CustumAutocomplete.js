@@ -5,7 +5,7 @@ import { Autocomplete, TextField, Box } from "@mui/material";
 const CustomAutoComplete = ({
   options = [],
   label = "",
-  onChange = () => {},
+  onChange = () => { },
   value = null,
   multiple = false,
   disableCloseOnSelect = false,
@@ -24,7 +24,7 @@ const CustomAutoComplete = ({
   variant = "outlined",
   disableOverlay = false,
   SideIcon = false,
-  categoryKey = "category", 
+  categoryKey = "category",
 }) => {
   const formattedOptions = options.flatMap((item) => {
     const category = item[categoryKey] || null;

@@ -25,7 +25,7 @@ const CustomDots = ({ dots, slider }) => (
                     transition: "background-color 0.3s ease",
                     cursor: "pointer",
                 }}
-                onClick={() => slider.slickGoTo(index)} 
+                onClick={() => slider.slickGoTo(index)}
             />
         ))}
     </Box>
@@ -40,12 +40,12 @@ const Carousel = ({
     const sliderRef = React.useRef(null);
 
     const defaultSettings = {
-        dots: true, 
+        dots: true,
         infinite: true,
         speed: 500,
         slidesToShow: 6,
         slidesToScroll: 1,
-        appendDots: (dots) => <CustomDots dots={dots} slider={sliderRef.current} />, 
+        appendDots: (dots) => <CustomDots dots={dots} slider={sliderRef.current} />,
         responsive: [
             {
                 breakpoint: 1025,
@@ -66,8 +66,6 @@ const Carousel = ({
                 },
             },
         ],
-        // autoplay: true,
-        // autoplaySpeed: 1000,
         ...customSettings,
     };
 
