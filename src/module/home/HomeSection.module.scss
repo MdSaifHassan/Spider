@@ -18,7 +18,7 @@
 
 /* Text Section */
 .textSection {
-  padding: 5px;
+  padding: 10px;
 
   .heading {
     font-weight: bold;
@@ -56,7 +56,7 @@
 
 /* Carousel Section */
 .carouselSection {
-  display: block; 
+  display: block;
 }
 
 .carouselItem {
@@ -72,7 +72,7 @@
 /* For screens larger than 600px but smaller than 960px (e.g., tablets/iPads) */
 @media (max-width: 960px) and (min-width: 601px) {
   .mainContainer {
-    height: 32rem; 
+    height: 32rem;
     overflow: visible;
     margin-top: 6rem;
   }
@@ -90,11 +90,11 @@
     padding-right: 380px;
 
     .heading {
-      font-size: 36px; 
+      font-size: 36px;
     }
 
     .description {
-      font-size: 16px; 
+      font-size: 16px;
     }
   }
 
@@ -114,7 +114,7 @@
   }
 
   .carouselSection {
-    display: block; 
+    display: block;
   }
 
   .carouselItem {
@@ -166,10 +166,10 @@
   }
 
   .carouselSection {
-    display: none; 
+    display: none;
   }
 
   .carouselItem {
-    display: none; 
+    display: none;
   }
 }

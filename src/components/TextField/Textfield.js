@@ -22,8 +22,8 @@ const CustomTextField = ({
     <TextField
       {...rest}
       label={label}
-      variant={variant} 
-      size={size} 
+      variant={variant}
+      size={size}
       fullWidth={fullWidth}
       value={value}
       onChange={onChange}

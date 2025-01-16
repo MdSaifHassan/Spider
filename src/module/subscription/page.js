@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import CustomTextField from "@/components/TextField/Textfield";
-import CaspianButton from "@/components/Button/Button";
-import subscriptionData from "@/module/subscription/subscriptionData";
-import FeatureCard from "@/components/Card/Card";
+import subscriptionData from "@/src/module/subscription/subscriptionData";
+import CaspianButton from "@/src/components/Button/Button";
+import FeatureCard from "@/src/components/Card/Card";
+import CustomTextField from "@/src/components/TextField/Textfield";
 
 const Subscription = () => {
     const data = subscriptionData[0];
@@ -28,7 +28,7 @@ const Subscription = () => {
                     backgroundColor: "#C4C4C4",
                     zIndex: 0,
                     borderRadius: "20px 0 0 20px",
-                    display: { xs: "none", sm: "block" }, // Hide on small screens
+                    display: { xs: "none", sm: "block" }, 
                 }}
             />
 
@@ -37,10 +37,10 @@ const Subscription = () => {
                 showImage={true}
                 image={data.image}
                 sx={{
-                    maxWidth: { xs: "100%", md: "100%" }, // Widen the card for larger screens
+                    maxWidth: { xs: "100%", md: "100%" }, 
                     mx: "auto",
                     my: 5,
-                    p: { xs: 3, sm: 4, md: 5 }, // Adjust padding for different sizes
+                    p: { xs: 3, sm: 4, md: 5 }, 
                     borderRadius: "15px",
                     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                     backgroundColor: "#ffffff",
@@ -94,7 +94,7 @@ const Subscription = () => {
                             color: "#666",
                             lineHeight: 1.6,
                             fontSize: { xs: "14px", sm: "16px" },
-                            textAlign: { xs: "center", sm: "left" }, // Added text alignment for responsiveness
+                            textAlign: { xs: "center", sm: "left" }, 
                         }}
                     >
                         {data.description}
@@ -132,7 +132,7 @@ const Subscription = () => {
                             title="Subscribe"
                             variant="primary"
                             size="medium"
-                            style={{
+                            sx={{
                                 backgroundColor: "#34A76C",
                                 color: "#ffffff",
                                 borderRadius: "5px",

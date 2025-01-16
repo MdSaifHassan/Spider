@@ -31,15 +31,17 @@ const LoginModal = ({ open, onClose }) => {
       sx={{
         width: "600px",
         "@media (max-width: 768px)": {
-          width: "90%",  // 90% of the screen width on smaller devices
+          width: "90%",
         },
         "@media (max-width: 480px)": {
-          width: "95%",  // 95% of the screen width on very small devices
+          width: "95%",
         },
       }}
       open={open}
       onClose={onClose}
       title="Login"
+      variant="h5"
+      fontWeight="bold"
       content={
         <form onSubmit={formik.handleSubmit}>
           <CustomTextField

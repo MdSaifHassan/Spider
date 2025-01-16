@@ -1,11 +1,11 @@
 import React from "react";
 import { Autocomplete, TextField, Box } from "@mui/material";
-import { IoIosArrowDown } from "react-icons/io";
+
 
 const CustomAutoComplete = ({
   options = [],
   label = "",
-  onChange = () => {},
+  onChange = () => { },
   value = null,
   multiple = false,
   disableCloseOnSelect = false,
@@ -19,42 +19,49 @@ const CustomAutoComplete = ({
   placeholder = "Type to search...",
   fullWidth = true,
   autocompleteSx = {},
-  textFieldSx = {}, 
-  textFieldProps = {}, 
-  variant = "outlined", 
-  disableOverlay = false, 
-  SideIcon=false,
+  textFieldSx = {},
+  textFieldProps = {},
+  variant = "outlined",
+  disableOverlay = false,
+  SideIcon = false,
+  categoryKey = "category",
 }) => {
+  const formattedOptions = options.flatMap((item) => {
+    const category = item[categoryKey] || null;
+    return {
+      ...item,
+      category,
+    };
+  });
+
   return (
     <Autocomplete
       freeSolo={SideIcon}
-      options={options}
-      value={value}
+      options={formattedOptions}
       onChange={onChange}
-      multiple={multiple}
       disableCloseOnSelect={disableCloseOnSelect}
       isOptionEqualToValue={isOptionEqualToValue}
       getOptionLabel={getOptionLabel}
       renderOption={renderOption}
-      disablePortal={disableOverlay} 
-      
+      disablePortal
+      groupBy={(option) => option.category}
       renderInput={(params) => (
         <TextField
           {...params}
           label={label}
           placeholder={placeholder}
           variant={variant}
-          sx={{ ...textFieldSx}} 
+          sx={{ ...textFieldSx }}
           {...textFieldProps}
         />
       )}
       fullWidth={fullWidth}
       sx={{
-        ...autocompleteSx,padding:"0px"
+        ...autocompleteSx,
+        padding: "0px",
       }}
     />
   );
 };
 
 export default CustomAutoComplete;
-
