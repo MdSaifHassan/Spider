@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import TabComponent from "@/components/Tab/TabComponent"; // Import your TabComponent
-import faqData from "@/module/faq/faqData"; // Import FAQ data
+import faqData from "@module/faq/faqData"; // Import FAQ data
+import TabComponent from "@components/Tab/TabComponent";
 
 const FAQSection = () => {
   const [selectedTab, setSelectedTab] = useState(0); // State to track selected tab
@@ -33,7 +33,6 @@ const FAQSection = () => {
         Have Any Question?
       </Typography>
 
-      {/* TabComponent */}
       <TabComponent
         tabs={faqData}
         defaultTab={0}

@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import CustomTextField from "@/components/TextField/Textfield";
-import CaspianButton from "@/components/Button/Button";
-import subscriptionData from "@/module/subscription/subscriptionData";
-import FeatureCard from "@/components/Card/Card";
+import subscriptionData from "@module/subscription/subscriptionData";
+import FeatureCard from "@components/Card/Card";
+import CustomTextField from "@components/TextField/Textfield";
+import CaspianButton from "@components/Button/Button";
 
 const Subscription = () => {
     const data = subscriptionData[0];
@@ -132,7 +132,7 @@ const Subscription = () => {
                             title="Subscribe"
                             variant="primary"
                             size="medium"
-                            style={{
+                            sx={{
                                 backgroundColor: "#34A76C",
                                 color: "#ffffff",
                                 borderRadius: "5px",

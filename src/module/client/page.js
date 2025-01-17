@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import Carousel from "@/components/Carousel/Carousel";
-import clientReviews from "@/module/client/data";
+import clientReviews from "@module/client/data";
+import Carousel from "@components/Carousel/Carousel";
 
 const ClientCarousel = () => {
     return (
@@ -28,7 +28,6 @@ const ClientCarousel = () => {
                 What Our Client Says
             </Typography>
 
-            {/* Carousel */}
             <Carousel
                 items={clientReviews}
                 renderItem={(item) => (

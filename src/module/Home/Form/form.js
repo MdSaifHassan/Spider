@@ -1,23 +1,20 @@
-"use client"
+"use client";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Box, TextField, Typography } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { formValidationSchema } from "../../../utils/formvalidation/ServicesForm";
-import { updateForm } from "../../../utils/slices/formSlice";
 import CustomAutoComplete from "../../../components/Autocomplete/CustumAutocomplete";
 import CaspianButton from "../../../components/Button/Button";
 
 const Form = () => {
-  const dispatch = useDispatch();
-  const { categories, services, formData } = useSelector((state) => state.form);
-
   const formik = useFormik({
     initialValues: {
-      ...formData,
-      date: formData.date ? new Date(formData.date) : null,
-      time: formData.time ? new Date(formData.time) : null,
+      category: "",
+      service: "",
+      date: null,
+      time: null,
+      description: "",
     },
     validationSchema: formValidationSchema,
     onSubmit: (values) => {
@@ -26,10 +23,7 @@ const Form = () => {
   });
 
   const handleFieldChange = (field, value) => {
-    const serializedValue =
-      field === "date" || field === "time" ? value?.toISOString() : value;
-    formik.setFieldValue(field, serializedValue);
-    dispatch(updateForm({ [field]: serializedValue }));
+    formik.setFieldValue(field, value);
   };
 
   const getError = (field) =>
@@ -40,20 +34,20 @@ const Form = () => {
       component="form"
       onSubmit={formik.handleSubmit}
       sx={{
-        maxWidth: 350,
+        maxWidth: 400,
         mx: "auto",
-        background: "#EEEEEEE5",
+        background: "#f9f9f9",
         borderRadius: 2,
-        padding: 2,
+        padding: 3,
       }}
     >
-      <Typography variant="h5" fontWeight={"bold"} mb={2}>
-        Select Our Services
+      <Typography variant="h5" fontWeight="bold" mb={2}>
+        Service Selection Form
       </Typography>
 
       <Box mb={2}>
         <CustomAutoComplete
-          options={categories} 
+          options={[{ value: "Category1", label: "Category 1" }, { value: "Category2", label: "Category 2" }]}
           label="Select Category"
           value={formik.values.category}
           onChange={(e, value) => handleFieldChange("category", value?.value)}
@@ -67,10 +61,10 @@ const Form = () => {
 
       <Box mb={2}>
         <CustomAutoComplete
-          options={services} // No change here
-          label="Select Services"
+          options={[{ value: "Service1", label: "Service 1" }, { value: "Service2", label: "Service 2" }]}
+          label="Select Service"
           value={formik.values.service}
-          onChange={(e, value) => handleFieldChange("service", value?.value)} // Adjust value handling
+          onChange={(e, value) => handleFieldChange("service", value?.value)}
           placeholder="Select a service"
           textFieldProps={{
             error: getError("service"),
@@ -82,14 +76,13 @@ const Form = () => {
       <Box mb={2}>
         <DatePicker
           label="Select Date"
-          value={formik.values.date ? new Date(formik.values.date) : null}
+          value={formik.values.date}
           onChange={(value) => handleFieldChange("date", value)}
-          minDate={new Date()}
           slotProps={{
             textField: {
               fullWidth: true,
               error: getError("date"),
-              helperText: getError("date") ? "" : null,
+              helperText: formik.errors.date,
               size: "small",
             },
           }}
@@ -99,13 +92,13 @@ const Form = () => {
       <Box mb={2}>
         <TimePicker
           label="Select Time"
-          value={formik.values.time ? new Date(formik.values.time) : null}
+          value={formik.values.time}
           onChange={(value) => handleFieldChange("time", value)}
           slotProps={{
             textField: {
               fullWidth: true,
               error: getError("time"),
-              helperText: getError("time") ? "" : null,
+              helperText: formik.errors.time,
               size: "small",
             },
           }}
@@ -121,6 +114,7 @@ const Form = () => {
           onChange={(e) => handleFieldChange("description", e.target.value)}
           fullWidth
           error={getError("description")}
+          helperText={formik.errors.description}
           size="small"
         />
       </Box>

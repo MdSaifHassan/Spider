@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import footerData from '@/module/footer/FooterData';
-import DropdownComponent from '@/components/Dropdwon/footerDropDown';
+import footerData from '@module/footer/FooterData';
+import FooterDropdown from '@components/Dropdwon/footerDropDown';
 
 const Footer = () => {
   const { contact, links, copyright } = footerData;
@@ -129,7 +129,7 @@ const Footer = () => {
                 key={sectionIndex}
                 sx={{ display: { xs: 'block', sm: 'none' } }} // Show dropdowns on small screens
               >
-                <DropdownComponent
+                <FooterDropdown
                   title={section.title}
                   items={section.items}
                   containerSx={{

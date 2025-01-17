@@ -1,195 +1,176 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useFormik } from "formik";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
-  Backdrop,
-  Checkbox,
+  Stack,
   FormControlLabel,
+  Checkbox,
+  Backdrop,
 } from "@mui/material";
-import CustomTextField from "../../Components/TextField/Textfield";
-import CustomAutoComplete from "../../Components/Autocomplete/CustumAutocomplete";
-import { addressValidationSchema } from "../../utils/formvalidation/addressValidationSchema";
-import { updateForm } from "../../utils/slices/addresSlice";
-import CaspianButton from "../../Components/Button/Button";
+import CustomAutoComplete from "@components/Autocomplete/CustumAutocomplete";
+import CustomTextField from "@components/TextField/Textfield";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addAddress,
+  updateAddress,
+  setDefaultAddress,
+} from "@utils/slices/addresSlice";
+import { useFormik } from "formik";
+import { addressValidationSchema } from "@utils/formvalidation/addressValidationSchema";
+import CaspianButton from "@components/Button/Button";
 
-const AddAddressPage = ({ open, onClose }) => {
+const AddAddressBackdrop = ({ open, onClose }) => {
   const dispatch = useDispatch();
-  const formData = useSelector((state) => state.form.formData);
-
-  const states = [
-    { label: "State 1", id: 1 },
-    { label: "State 2", id: 2 },
-  ];
-
-  const cities = [
-    { label: "City 1", id: 1 },
-    { label: "City 2", id: 2 },
-  ];
+  const [setAsDefault, setSetAsDefault] = useState(false);
+  const addresses = useSelector((state) => state.address.addresses);
 
   const formik = useFormik({
-    initialValues: formData,
+    initialValues: {
+      address: "",
+      state: "",
+      city: "",
+      postalCode: "",
+      additionalInfo: "",
+    },
     validationSchema: addressValidationSchema,
     onSubmit: (values) => {
-      dispatch(updateForm(values));
+      if (setAsDefault && addresses.length > 0) {
+        const updatedAddress = {
+          ...addresses[0],
+          ...values,
+          id: addresses[0].id,
+        };
+        dispatch(updateAddress(updatedAddress));
+        dispatch(setDefaultAddress(updatedAddress.id));
+      } else {
+        const newAddress = { ...values, id: Date.now() };
+        dispatch(addAddress(newAddress));
+        if (setAsDefault) {
+          dispatch(setDefaultAddress(newAddress.id));
+        }
+      }
+      formik.resetForm();
       onClose();
     },
   });
 
   return (
-    <Backdrop open={open} onClick={onClose}>
+    <Backdrop
+      open={open}
+      onClick={onClose}
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        bgcolor: "rgba(0, 0, 0, 0.5)",
+      }}
+    >
       <Box
         sx={{
           width: "100%",
           height: "100vh",
           display: "flex",
           justifyContent: "center",
-          alignItems: "flex-start", 
+          alignItems: "flex-start",
           backgroundColor: { xs: "#fff", md: "transparent" },
-          overflowY: "auto", 
-          paddingTop: { xs: "20px", md: 0 }, 
+          overflowY: "auto",
+          paddingTop: { xs: "20px", md: 0 },
           paddingBottom: { xs: "20px", md: 0 },
-
         }}
-        onClick={(e) => e.stopPropagation()} 
+       
       >
         <Box
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             width: "80%",
-            // gap: 2,
-            margin:"auto"
+            margin: "auto",
           }}
+          onClick={(e) => e.stopPropagation()}
         >
-          {/* Form Section */}
-          <Box
-            sx={{
-              backgroundColor: "#fff",
-              borderRadius: 2,
-              width: { xs: "100%", md: "400px" },
-              p: 2,
-              boxShadow: 3,
-              marginBottom: { xs: 2, md: 0 },
-              overflowY: "auto", 
-              // flex: 1, 
-            }}
-          >
-            <Typography component="h1" variant="h6" sx={{ mb: 2 }}>
+          <Box p={3} bgcolor="#fff" borderRadius={2} width="400px">
+            <Typography variant="h6" mb={2}>
               Add Address
             </Typography>
-            <Typography
-              component="div"
-              variant="body2"
-              sx={{ mb: 2, color: "gray" }}
-            >
-              Add a new address where you want our services.
-            </Typography>
             <form onSubmit={formik.handleSubmit}>
-              <CustomTextField
-                label="Address"
-                name="address"
-                fullWidth
-                multiline
-                rows={2}
-                value={formik.values.address}
-                onChange={formik.handleChange}
-                error={formik.touched.address && Boolean(formik.errors.address)}
-                helperText={
-                  formik.touched.address && formik.errors.address
-                    ? formik.errors.address
-                    : ""
-                }
-                sx={{ mb: 2 }}
-              />
-              <CustomAutoComplete
-                options={states}
-                label="State"
-                name="state"
-                value={formik.values.state}
-                onChange={(e, value) => formik.setFieldValue("state", value)}
-                error={formik.touched.state && Boolean(formik.errors.state)}
-                helperText={
-                  formik.touched.state && formik.errors.state
-                    ? formik.errors.state
-                    : ""
-                }
-                fullWidth
-                autocompleteSx={{ mb: 2 }}
-              />
-              <CustomAutoComplete
-                options={cities}
-                label="City"
-                name="city"
-                value={formik.values.city}
-                onChange={(e, value) => formik.setFieldValue("city", value)}
-                error={formik.touched.city && Boolean(formik.errors.city)}
-                helperText={
-                  formik.touched.city && formik.errors.city
-                    ? formik.errors.city
-                    : ""
-                }
-                fullWidth
-                autocompleteSx={{ mb: 2 }}
-              />
-              <CustomTextField
-                label="Postal Code"
-                name="postalCode"
-                fullWidth
-                value={formik.values.postalCode}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.postalCode && Boolean(formik.errors.postalCode)
-                }
-                helperText={
-                  formik.touched.postalCode && formik.errors.postalCode
-                    ? formik.errors.postalCode
-                    : ""
-                }
-                placeholder="e.g. 495000"
-                sx={{ mb: 2 }}
-              />
-              <CustomTextField
-                label="Additional Information"
-                name="additionalInfo"
-                fullWidth
-                multiline
-                rows={2}
-                value={formik.values.additionalInfo}
-                onChange={formik.handleChange}
-                error={
-                  formik.touched.additionalInfo &&
-                  Boolean(formik.errors.additionalInfo)
-                }
-                helperText={
-                  formik.touched.additionalInfo && formik.errors.additionalInfo
-                    ? formik.errors.additionalInfo
-                    : ""
-                }
-                sx={{ mb: 2 }}
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="isDefault"
-                    checked={formik.values.isDefault}
-                    onChange={formik.handleChange}
-                  />
-                }
-                label="Set as default address"
-                sx={{ mb: 2 }}
-              />
-              <CaspianButton
-                type="submit"
-                variant="custom"
-                size="medium"
-                title="Save Address & Proceed"
-              />
+              <Stack spacing={2}>
+                <CustomTextField
+                  label="Address"
+                  name="address"
+                  multiline
+                  rows={2}
+                  value={formik.values.address}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.address && Boolean(formik.errors.address)
+                  }
+                  helperText={formik.touched.address && formik.errors.address}
+                  fullWidth
+                />
+                <CustomAutoComplete
+                  label="State"
+                  options={[
+                    { id: 1, label: "State 1" },
+                    { id: 2, label: "State 2" },
+                  ]}
+                  getOptionLabel={(option) => option.label || ""}
+                  onChange={(e, value) =>
+                    formik.setFieldValue("state", value?.label || "")
+                  }
+                  error={formik.touched.state && Boolean(formik.errors.state)}
+                  helperText={formik.touched.state && formik.errors.state}
+                />
+                <CustomAutoComplete
+                  label="City"
+                  options={[
+                    { id: 1, label: "City 1" },
+                    { id: 2, label: "City 2" },
+                  ]}
+                  getOptionLabel={(option) => option.label || ""}
+                  onChange={(e, value) =>
+                    formik.setFieldValue("city", value?.label || "")
+                  }
+                  error={formik.touched.city && Boolean(formik.errors.city)}
+                  helperText={formik.touched.city && formik.errors.city}
+                />
+                <CustomTextField
+                  label="Postal Code"
+                  name="postalCode"
+                  value={formik.values.postalCode}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.postalCode &&
+                    Boolean(formik.errors.postalCode)
+                  }
+                  helperText={
+                    formik.touched.postalCode && formik.errors.postalCode
+                  }
+                  fullWidth
+                />
+                <CustomTextField
+                  label="Additional Information"
+                  name="additionalInfo"
+                  value={formik.values.additionalInfo}
+                  onChange={formik.handleChange}
+                  fullWidth
+                  multiline
+                  rows={2}
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={setAsDefault}
+                      onChange={(e) => setSetAsDefault(e.target.checked)}
+                    />
+                  }
+                  label="Set as default address"
+                />
+                <Box textAlign="left">
+                  <CaspianButton type="submit" variant="custom" color="#fff">
+                    Save Address & Proceed
+                  </CaspianButton>
+                </Box>
+              </Stack>
             </form>
           </Box>
-
-          {/* Map Section */}
           <Box
             sx={{
               flex: 1,
@@ -199,7 +180,7 @@ const AddAddressPage = ({ open, onClose }) => {
               justifyContent: "center",
               alignItems: "center",
               borderRadius: "10px",
-              margin:"auto"
+              margin: "auto",
             }}
           >
             <img
@@ -219,4 +200,4 @@ const AddAddressPage = ({ open, onClose }) => {
   );
 };
 
-export default AddAddressPage;
+export default AddAddressBackdrop;

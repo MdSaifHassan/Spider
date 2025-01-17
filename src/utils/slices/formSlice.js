@@ -6,7 +6,7 @@ const initialState = {
   services,
   formData: initialFormData,
   user: null,
-  isAuthenticated: false,
+  isAuthenticated: true,
   registeredUsers: [],
 };
 

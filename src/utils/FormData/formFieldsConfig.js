@@ -1,16 +1,16 @@
 
 export const categories = [
-  { label: "Category 1", category: "Category" },
-  { label: "Category 3", category: "Category" },
-  { label: "Category 4", category: "Category" },
+  { label: "Category 1", id:1},
+  { label: "Category 3", id:2},
+  { label: "Category 4", id:3},
   { label: "Simple Category 1", },  
   { label: "Simple Category 2",}   
 ];
 
 export const services = [
-  { label: "Service 1", category: "Service" },
-  { label: "Service 2", category: "Service" },
-  { label: "Service 3", category: "Service" },
+  { label: "Service 1", id: 1 },
+  { label: "Service 2", id: 2 },
+  { label: "Service 3", id:  3},
   { label: "Simple Service 1",  },    
   { label: "Simple Service 2",  }   
 ];
