@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Box, Typography, Grid } from "@mui/material";
-import faqData from "@/src/module/faq/faqData";
+import faqData from "@/src/helpers/faqData";
 import TabComponent from "@/src/components/Tab/TabComponent";
 
 const FAQSection = () => {

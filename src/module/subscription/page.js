@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import subscriptionData from "@/src/module/subscription/subscriptionData";
+import subscriptionData from "@/src/helpers/subscriptionData";
 import CaspianButton from "@/src/components/Button/Button";
 import FeatureCard from "@/src/components/Card/Card";
 import CustomTextField from "@/src/components/TextField/Textfield";

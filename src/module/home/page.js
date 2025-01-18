@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import homeData from "@/src/module/home/HomeData";
+import homeData from "@/src/helpers/HomeData";
 import Form from "@/src/module/home/Form/form";
 import { Provider } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

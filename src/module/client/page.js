@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import clientReviews from "@/src/module/client/data";
+import clientReviews from "@/src/helpers/data";
 import Carousel from "@/src/components/Carousel/Carousel";
 
 const ClientCarousel = () => {

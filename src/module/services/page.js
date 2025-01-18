@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Typography, Grid, useMediaQuery, useTheme } from "@mui/material";
-import servicesData from "@/src/module/services/servicesData";
+import servicesData from "@/src/helpers/servicesData";
 import FeatureCard from "@/src/components/Card/Card";
 import Carousel from "@/src/components/Carousel/Carousel";
 
