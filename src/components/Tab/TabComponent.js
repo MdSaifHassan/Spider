@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography } from "@mui/material";
+import { Tabs, Tab, Stack, Typography, Box } from "@mui/material";
 
 const TabComponent = ({
   tabs,
@@ -7,14 +7,14 @@ const TabComponent = ({
   defaultTab = 0,
   tabStyles = {},
   centerTabs = false,
-  onTabChange, // Prop to handle tab change in parent
+  onTabChange, 
 }) => {
   const [selectedTab, setSelectedTab] = useState(defaultTab);
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
     if (onTabChange) {
-      onTabChange(event, newValue); // Notify parent of tab change
+      onTabChange(event, newValue); 
     }
   };
 
@@ -36,12 +36,11 @@ const TabComponent = ({
           <Tab
             key={index}
             label={
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
+              <Stack
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                sx={{ gap: 0.5 }}
               >
                 <Typography
                   variant="body1"
@@ -63,7 +62,7 @@ const TabComponent = ({
                     }}
                   />
                 )}
-              </Box>
+              </Stack>
             }
             sx={{
               minWidth: "auto",
