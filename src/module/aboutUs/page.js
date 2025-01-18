@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import aboutData from "@/src/module/aboutUs/aboutData";
+import aboutData from "@/src/helpers/aboutData";
 
 const AboutUs = () => {
   const { heading, description, images } = aboutData;

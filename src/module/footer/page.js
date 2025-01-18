@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import footerData from '@/src/module/footer/FooterData';
+import footerData from '@/src/helpers/FooterData';
 import FooterDropdown from '@/src/components/Dropdown/footerDropDown';
 
 const Footer = () => {

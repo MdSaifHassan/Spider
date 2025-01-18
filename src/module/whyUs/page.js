@@ -3,7 +3,7 @@
 'use client'
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import data from "@/src/module/whyUs/WhyUsData";
+import data from "@/src/helpers/WhyUsData";
 import FeatureCard from "@/src/components/Card/Card";
 
 const WhyUs = () => {
