@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import CaspianButton from "../Button/Button";
 
 const FeatureCard = ({
@@ -19,7 +19,8 @@ const FeatureCard = ({
   showImage = false,
   boxSx = {},
   variant,
-  iconsx
+  iconsx,
+  additionalButton = null, 
 }) => {
   return (
     <Card
@@ -70,14 +71,19 @@ const FeatureCard = ({
           )}
 
           {showButton && (
-            <Box mt={2}>
+            <Stack mt={2} display={"flex"}  flexDirection={"row"} gap={2}>
               <CaspianButton
                 variant={variant}
                 size="medium"
                 title={buttonText}
                 onClick={onButtonClick}
               />
-            </Box>
+              {additionalButton && (
+            <Stack>
+              {additionalButton}
+            </Stack>
+          )}
+            </Stack>
           )}
         </Box>
 
