@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, Stack } from "@mui/material";
 import faqData from "@/src/helpers/faqData";
 import TabComponent from "@/src/components/Tab/TabComponent";
 
@@ -14,8 +14,9 @@ const FAQSection = () => {
 
   return (
     <Box
+      id="faq"
       sx={{
-        py: 2,
+        py: 4,
         px: { xs: 2, sm: 3, md: 2 },
         position: "relative",
       }}
@@ -33,6 +34,7 @@ const FAQSection = () => {
         Have Any Question?
       </Typography>
 
+      {/* Tab Component */}
       <TabComponent
         tabs={faqData}
         defaultTab={0}
@@ -45,28 +47,31 @@ const FAQSection = () => {
       />
 
       {/* FAQ Content */}
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ mt: 1 }}>
         {faqData[selectedTab]?.questions?.map((item, index) => (
           <Grid item xs={12} md={6} key={index}>
-            <Box
-              sx={{
-                px: 1,
-                mt: 1.5
-              }}
-            >
+            <Stack spacing={1} sx={{ px: 1 }}>
               <Typography
                 variant="h6"
-                sx={{ fontWeight: "bold", color: "#333", fontSize: { xs: "16px", sm: "20px" } }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#333",
+                  fontSize: { xs: "16px", sm: "20px" },
+                }}
               >
                 {item.question}
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: "#666", lineHeight: 1.6, fontSize: { xs: "14px", sm: "16px" } }}
+                sx={{
+                  color: "#666",
+                  lineHeight: 1.6,
+                  fontSize: { xs: "14px", sm: "16px" },
+                }}
               >
                 {item.answer}
               </Typography>
-            </Box>
+            </Stack>
           </Grid>
         ))}
       </Grid>
