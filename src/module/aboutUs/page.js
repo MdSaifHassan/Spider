@@ -10,7 +10,9 @@ const AboutUs = () => {
   const { heading, description, images } = aboutData;
 
   return (
-    <Box className={styles.aboutUs}>
+    <Box
+      id="about"
+      className={styles.aboutUs}>
       <Grid container spacing={4} alignItems="center">
         {/* Text Section */}
         <Grid item xs={12} md={6} className={styles.textSection}>
@@ -30,7 +32,7 @@ const AboutUs = () => {
               src={images.topLeftCircle}
               alt="Top Left Circle"
               className={`${styles.decorativeImage} ${styles.topLeft}`}
-              width={96} 
+              width={96}
               height={96}
             />
 
@@ -39,8 +41,8 @@ const AboutUs = () => {
               src={images.main}
               alt="Main Image"
               className={styles.mainImage}
-              width={384} 
-              height={384} 
+              width={384}
+              height={384}
             />
 
             {/* Decorative Circle Bottom Right */}
@@ -48,7 +50,7 @@ const AboutUs = () => {
               src={images.bottomRightCircle}
               alt="Bottom Right Circle"
               className={`${styles.decorativeImage} ${styles.bottomRight}`}
-              width={96} 
+              width={96}
               height={96}
             />
           </Box>
