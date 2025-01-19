@@ -1,98 +1,55 @@
-'use client'
+'use client';
 
-import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
-import aboutData from "@/src/helpers/aboutData";
+import React from 'react';
+import Image from 'next/image';
+import { Box, Grid, Typography } from '@mui/material';
+import aboutData from '@/src/helpers/aboutData';
+import styles from './AboutUs.module.scss';
 
 const AboutUs = () => {
   const { heading, description, images } = aboutData;
 
   return (
-    <Box
-      sx={{
-        py: 2,
-        px: { xs: 2, sm: 3, md: 2 },
-        position: "relative",
-      }}
-    >
+    <Box className={styles.aboutUs}>
       <Grid container spacing={4} alignItems="center">
         {/* Text Section */}
-        <Grid item xs={12} md={6}>
-          <Typography
-            variant="h4"
-            sx={{
-              color: "#34A76C", fontWeight: "bold", marginBottom: "20px", fontSize: { xs: "20px", sm: "24px", md: "36px" },
-            }}
-          >
+        <Grid item xs={12} md={6} className={styles.textSection}>
+          <Typography variant="h4" className={styles.heading}>
             {heading}
           </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              color: "textSecondary", lineHeight: 1.8, fontSize: { xs: "14px", sm: "16px" },
-            }}
-          >
+          <Typography variant="body1" className={styles.description}>
             {description}
           </Typography>
         </Grid>
 
         {/* Image Section */}
-        <Grid item xs={12} md={6} sx={{ position: "relative" }}>
-          {/* Image Wrapper Box */}
-          <Box
-            sx={{
-              position: "relative",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              maxWidth: "24rem",
-              margin: "0 auto",
-            }}
-          >
+        <Grid item xs={12} md={6} className={styles.imageSection}>
+          <Box className={styles.imageWrapper}>
             {/* Decorative Circle Top Left */}
-            <Box
-              component="img"
+            <Image
               src={images.topLeftCircle}
               alt="Top Left Circle"
-              sx={{
-                position: "absolute",
-                top: "-2rem",
-                left: "-3rem",
-                width: "6rem",
-                height: "auto",
-                zIndex: 1,
-                display: { xs: "none", md: "block" },
-              }}
+              className={`${styles.decorativeImage} ${styles.topLeft}`}
+              width={96} 
+              height={96}
             />
 
             {/* Main Image */}
-            <Box
-              component="img"
+            <Image
               src={images.main}
               alt="Main Image"
-              sx={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "0.5rem",
-                boxShadow: "0rem 0.25rem 0.625rem rgba(0, 0, 0, 0.1)",
-                zIndex: 2,
-              }}
+              className={styles.mainImage}
+              width={384} 
+              height={384} 
             />
 
             {/* Decorative Circle Bottom Right */}
-            <Box
-              component="img"
+            <Image
               src={images.bottomRightCircle}
               alt="Bottom Right Circle"
-              sx={{
-                position: "absolute",
-                bottom: "-2rem",
-                right: "-3rem",
-                width: "6rem",
-                height: "auto",
-                zIndex: 1,
-                display: { xs: "none", md: "block" },
-              }}
+              className={`${styles.decorativeImage} ${styles.bottomRight}`}
+              width={96} 
+              height={96}
             />
           </Box>
         </Grid>
