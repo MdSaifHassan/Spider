@@ -46,21 +46,11 @@ const WhyUs = () => {
               sx={{
                 width: { xs: 160, sm: 220, md: 220 },
                 height: { xs: 140, sm: 155 },
-                boxShadow: 2,
                 backgroundColor: "#EEEEEE",
-                borderRadius: "10px",
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.05)" },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
               }}
               boxSx={{
                 width: { xs: 55, sm: 65, md: 75 },
                 height: { xs: 50, sm: 60, md: 70 },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
               }}
             />
             <Typography
