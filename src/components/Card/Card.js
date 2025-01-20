@@ -1,6 +1,9 @@
 import React from "react";
+  import Image from "next/image";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import CaspianButton from "../Button/Button";
+  import styles from "./Card.module.scss";
+
 
 const FeatureCard = ({
   icon,
@@ -17,43 +20,30 @@ const FeatureCard = ({
   onButtonClick,
   image = null,
   showImage = false,
-  boxSx = {},
+  imageSx = {},
   variant,
   iconsx,
   additionalButton = null,
 }) => {
   return (
     <Card
-      sx={{
-        textAlign: "left",
-        p: 2,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        mx: "auto",
-        border: isSelected ? "2px solid #00AEEF" : "1px solid #ccc",
-        borderRadius: 2,
-        boxShadow: isSelected ? "0 4px 8px rgba(0, 174, 239, 0.2)" : "0 2px 4px rgba(0, 0, 0, 0.1)",
-        alignItems: "center",
-        transition: "transform 0.3s",
-        "&:hover": { transform: "scale(1.05)" },
-        ...sx,
-      }}
-    >
-      <CardContent sx={{ flexDirection: "row", display: "flex" }}>
-        {showImage && image && (
-          <Box
-            component="img"
-            src={image}
-            alt="Card-Img"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              ...boxSx,
-            }}
-          />
-        )}
+        className={`${styles.featureCard} ${isSelected ? styles.selected : ""}`}
+        sx={{ ...sx }}
+      >
+        <CardContent sx={{ flexDirection: "row", display: "flex" }}>
+          <Stack spacing={2}>
+            {showImage && image && (
+              <Image
+                src={image}
+                alt="Card Image"
+                className={styles.cardImage}
+                style={imageSx}
+                width={85} 
+                height={85} 
+              />
+            )}
+             </Stack>
+
 
         {showIcon && (
           <Box mb={2} >
