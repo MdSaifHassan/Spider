@@ -20,7 +20,7 @@ const FeatureCard = ({
   boxSx = {},
   variant,
   iconsx,
-  additionalButton = null, 
+  additionalButton = null,
 }) => {
   return (
     <Card
@@ -34,6 +34,9 @@ const FeatureCard = ({
         border: isSelected ? "2px solid #00AEEF" : "1px solid #ccc",
         borderRadius: 2,
         boxShadow: isSelected ? "0 4px 8px rgba(0, 174, 239, 0.2)" : "0 2px 4px rgba(0, 0, 0, 0.1)",
+        alignItems: "center",
+        transition: "transform 0.3s",
+        "&:hover": { transform: "scale(1.05)" },
         ...sx,
       }}
     >
@@ -44,6 +47,9 @@ const FeatureCard = ({
             src={image}
             alt="Card-Img"
             sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               ...boxSx,
             }}
           />
@@ -71,7 +77,7 @@ const FeatureCard = ({
           )}
 
           {showButton && (
-            <Stack mt={2} display={"flex"}  flexDirection={"row"} gap={2}>
+            <Stack mt={2} display={"flex"} flexDirection={"row"} gap={2}>
               <CaspianButton
                 variant={variant}
                 size="medium"
@@ -79,10 +85,10 @@ const FeatureCard = ({
                 onClick={onButtonClick}
               />
               {additionalButton && (
-            <Stack>
-              {additionalButton}
-            </Stack>
-          )}
+                <Stack>
+                  {additionalButton}
+                </Stack>
+              )}
             </Stack>
           )}
         </Box>
