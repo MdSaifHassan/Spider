@@ -3,10 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
-import navLinks from './NavLinks';
+import navLinks from '../../helpers/NavLinks';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -18,6 +17,8 @@ import SignUpModal from '@/src/module/SignUp/page';
 import { Provider } from 'react-redux';
 import { store } from '../../utils/store';
 import CaspianButton from '../Button/Button';
+import Stack from '@mui/material/Stack';
+
 
 const Header = () => {
   const router = useRouter();
@@ -32,7 +33,7 @@ const Header = () => {
       setScrolled(window.scrollY > 0);
 
       const sections = navLinks.map((link) => document.querySelector(link.path));
-      const scrollPosition = window.scrollY + 200; // Adjust for AppBar height
+      const scrollPosition = window.scrollY + 200; 
 
       sections.forEach((section, index) => {
         if (section) {
@@ -73,165 +74,140 @@ const Header = () => {
             background: '#ffffff',
           }}
         >
-          <Box sx={{ padding: '0 5px' }}>
-            <Toolbar
-              sx={{
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
+          <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+            {/* Logo */}
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 'bold', color: '#34A76C', cursor: 'pointer' }}
+              onClick={() => router.push('/')}
             >
-              {/* Logo */}
-              <Box
-                sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-                onClick={() => router.push('/')}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 'bold', color: '#34A76C' }}
-                >
-                  Logo
-                </Typography>
-              </Box>
+              Logo
+            </Typography>
 
-              {/* Desktop Links */}
-              <Box
-                sx={{
-                  display: { xs: 'none', md: 'flex' },
-                  alignItems: 'center',
-                  gap: 3,
-                }}
-              >
-                {navLinks.map((link, index) => (
-                  <Typography
-                    key={index}
-                    onClick={() => handleScrollToSection(link.path)}
-                    sx={{
-                      cursor: 'pointer',
-                      textDecoration: 'none',
-                      color: activeLink === link.path ? '#34A76C' : '#A0A0A0',
-                      fontWeight: activeLink === link.path ? 'bold' : 'normal',
-                      fontSize: '16px',
-                      borderBottom: activeLink === link.path ? '2px solid #34A76C' : 'none',
-                      transition: 'color 0.3s ease-in-out, border-bottom 0.3s ease-in-out',
-                    }}
-                  >
-                    {link.title}
-                  </Typography>
-                ))}
-                <CaspianButton
-                  variant="tertiary"
-                  size="medium"
-                  sx={{
-                    border: '1px solid #34A76C',
-                    color: '#34A76C',
-                    borderRadius: '5px',
-                    padding: '5px 20px',
-                  }}
-                  onClick={() => setIsLoginOpen(true)}
-                >
-                  Log in
-                </CaspianButton>
-                <CaspianButton
-                  variant="primary"
-                  size="medium"
-                  style={{
-                    backgroundColor: '#34A76C',
-                    color: '#ffffff',
-                    borderRadius: '5px',
-                    padding: '5px 20px',
-                  }}
-                  onClick={() => setIsSignUpOpen(true)}
-                >
-                  Sign Up
-                </CaspianButton>
-              </Box>
-
-              {/* Mobile Menu Icon */}
-              <IconButton
-                edge="end"
-                color="inherit"
-                aria-label="menu"
-                sx={{ display: { xs: 'flex', md: 'none' } }}
-                onClick={() => setDrawerOpen(true)}
-              >
-                <CgMenuRight />
-              </IconButton>
-            </Toolbar>
-          </Box>
-
-          {/* Mobile Action Buttons */}
-          <Box
-            sx={{
-              display: { xs: 'flex', md: 'none' },
-              justifyContent: 'end',
-              gap: 2,
-              padding: '5px 10px',
-              background: '#ffffff',
-            }}
-          >
-            <CaspianButton
-              variant="tertiary"
-              size="medium"
-              style={{
-                border: '1px solid #34A76C',
-                color: '#34A76C',
-                borderRadius: '5px',
-                padding: '5px 15px',
-              }}
-              onClick={() => setIsLoginOpen(true)} // Open Login Modal
+            {/* Desktop Links */}
+            <Stack
+              direction="row"
+              spacing={3}
+              sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}
             >
-              Log in
-            </CaspianButton>
-            <CaspianButton
-              variant="primary"
-              size="medium"
-              style={{
-                backgroundColor: '#34A76C',
-                color: '#ffffff',
-                borderRadius: '5px',
-                padding: '5px 15px',
-              }}
-              onClick={() => setIsSignUpOpen(true)} // Open Sign Up Modal
-            >
-              Sign Up
-            </CaspianButton>
-          </Box>
-
-        </AppBar>
-
-        {/* Mobile Sidebar Drawer */}
-        <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-          <Box
-            sx={{
-              width: 250,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '100%',
-              padding: '16px 8px',
-            }}
-            role="presentation"
-            onClick={() => setDrawerOpen(false)}
-          >
-            <List>
               {navLinks.map((link, index) => (
-                <ListItem
-                  button
+                <Typography
                   key={index}
                   onClick={() => handleScrollToSection(link.path)}
                   sx={{
+                    cursor: 'pointer',
                     textDecoration: 'none',
                     color: activeLink === link.path ? '#34A76C' : '#A0A0A0',
                     fontWeight: activeLink === link.path ? 'bold' : 'normal',
                     fontSize: '16px',
                     borderBottom: activeLink === link.path ? '2px solid #34A76C' : 'none',
+                    transition: 'color 0.3s ease-in-out, border-bottom 0.3s ease-in-out',
                   }}
                 >
-                  <ListItemText primary={link.title} />
-                </ListItem>
+                  {link.title}
+                </Typography>
               ))}
-            </List>
-          </Box>
+              <CaspianButton
+                variant="tertiary"
+                size="medium"
+                sx={{
+                  border: '1px solid #34A76C',
+                  color: '#34A76C',
+                  borderRadius: '5px',
+                  padding: '5px 20px',
+                }}
+                onClick={() => setIsLoginOpen(true)}
+              >
+                Log in
+              </CaspianButton>
+              <CaspianButton
+                variant="primary"
+                size="medium"
+                sx={{
+                  backgroundColor: '#34A76C',
+                  color: '#ffffff',
+                  borderRadius: '5px',
+                  padding: '5px 20px',
+                }}
+                onClick={() => setIsSignUpOpen(true)}
+              >
+                Sign Up
+              </CaspianButton>
+            </Stack>
+
+            {/* Mobile Menu Icon */}
+            <IconButton
+              edge="end"
+              color="inherit"
+              aria-label="menu"
+              sx={{ display: { xs: 'flex', md: 'none' } }}
+              onClick={() => setDrawerOpen(true)}
+            >
+              <CgMenuRight />
+            </IconButton>
+          </Toolbar>
+
+        {/* Mobile Action Buttons */}
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            display: { xs: 'flex', md: 'none' },
+            justifyContent: 'end',
+            padding: '0 10px',
+            background: '#ffffff',
+          }}
+        >
+          <CaspianButton
+            variant="tertiary"
+            size="medium"
+            sx={{
+              border: '1px solid #34A76C',
+              color: '#34A76C',
+              borderRadius: '5px',
+              padding: '5px 15px',
+            }}
+            onClick={() => setIsLoginOpen(true)} // Open Login Modal
+          >
+            Log in
+          </CaspianButton>
+          <CaspianButton
+            variant="primary"
+            size="medium"
+            sx={{
+              backgroundColor: '#34A76C',
+              color: '#ffffff',
+              borderRadius: '5px',
+              padding: '5px 15px',
+            }}
+            onClick={() => setIsSignUpOpen(true)} // Open Sign Up Modal
+          >
+            Sign Up
+          </CaspianButton>
+        </Stack>
+
+        </AppBar>
+
+
+        {/* Mobile Sidebar Drawer */}
+        <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+          <List sx={{ width: 250, padding: '16px 8px' }}>
+            {navLinks.map((link, index) => (
+              <ListItem
+                button
+                key={index}
+                onClick={() => handleScrollToSection(link.path)}
+                sx={{
+                  color: activeLink === link.path ? '#34A76C' : '#A0A0A0',
+                  fontWeight: activeLink === link.path ? 'bold' : 'normal',
+                  fontSize: '16px',
+                  borderBottom: activeLink === link.path ? '2px solid #34A76C' : 'none',
+                }}
+              >
+                <ListItemText primary={link.title} />
+              </ListItem>
+            ))}
+          </List>
         </Drawer>
 
         {/* Login Modal */}
