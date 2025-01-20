@@ -1,23 +1,25 @@
 "use client";
 import React, { useState } from "react";
-import { Grid, Box, Typography, Backdrop, Divider,  } from "@mui/material";
+import { Grid, Box, Typography, Backdrop, Divider } from "@mui/material";
 import AddAddressBackdrop from "@/src/module/Address/AddressBackdrop";
 import { useSelector, useDispatch } from "react-redux";
-import {  FaPlus, FaRegDotCircle, FaTrash } from "react-icons/fa";
+import { FaPlus, FaRegDotCircle, FaTrash } from "react-icons/fa";
 import { FiHome } from "react-icons/fi";
 import { deleteAddress } from "@/src/utils/slices/addresSlice";
-import FeatureCard from "@/src/Components/Card/Card.js";
-import CaspianButton from "@/src/Components/Button/Button.js";
+import FeatureCard from "@/src/components/Card/Card.js";
+import CaspianButton from "@/src/components/Button/Button.js";
 import mechanicData from "@/src/utils/adressData/mechanicData";
 
 const AddressPage = () => {
   const [backdropOpen, setBackdropOpen] = useState(false);
   const addresses = useSelector((state) => state.address.addresses);
-  const defaultAddressId = useSelector((state) => state.address.defaultAddressId);
+  const defaultAddressId = useSelector(
+    (state) => state.address.defaultAddressId
+  );
   const dispatch = useDispatch();
 
   const handleDeleteAddress = (id) => {
-    dispatch(deleteAddress(id)); 
+    dispatch(deleteAddress(id));
   };
 
   const handleSelectAddress = (id) => {
@@ -25,8 +27,11 @@ const AddressPage = () => {
   };
 
   return (
-    <Box p={3}
-    mt={5}
+    <Box
+      p={3}
+      sx={{
+        mt: { md: 5, xs: 10 },
+      }}
     >
       <Typography variant="h4" mb={3}>
         Select Address
@@ -68,6 +73,7 @@ const AddressPage = () => {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
+                
                 showIcon
                 icon={
                   <Box sx={{ fontSize: 40 }}>
@@ -95,7 +101,6 @@ const AddressPage = () => {
                 sx={{
                   minWidth: { xs: "300px", sm: "300px", md: "300px" },
                   minHeight: { xs: "200px", sm: "200px", md: "200px" },
-                  
                 }}
               >
                 <FeatureCard
@@ -106,7 +111,7 @@ const AddressPage = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    boxShadow:"rgba(0, 0, 0, 0.35) 0px 0px 15px",
+                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 0px 15px",
                   }}
                   showIcon
                   icon={
@@ -134,10 +139,9 @@ const AddressPage = () => {
                       buttonText="Delete"
                       startIcon={<FaTrash />}
                       onClick={() => handleDeleteAddress(address.id)}
-                   >
-                    Delete
-                   </CaspianButton>
-                    
+                    >
+                      Delete
+                    </CaspianButton>
                   }
                 />
               </Grid>
