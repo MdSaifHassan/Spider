@@ -2,11 +2,14 @@
 
 'use client'
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, useMediaQuery, Typography, useTheme } from "@mui/material";
 import data from "@/src/helpers/WhyUsData";
 import FeatureCard from "@/src/components/Card/Card";
 
 const WhyUs = () => {
+  const theme = useTheme();
+  const isSmallDevice = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMediumDevice = useMediaQuery(theme.breakpoints.between("sm", "md"));
   return (
     <Box
       sx={{
@@ -41,16 +44,24 @@ const WhyUs = () => {
             sx={{ textAlign: "center" }}
           >
             <FeatureCard
-              showImage={true} 
+              showImage={true}
               image={item.image}
               sx={{
-                width: { xs: 160, sm: 220, md: 220 },
-                height: { xs: 140, sm: 155 },
+                width: { xs: 140, sm: 200, md: 220 },
+                height: { xs: 120, sm: 155 },
                 backgroundColor: "#EEEEEE",
               }}
-              boxSx={{
-                width: { xs: 55, sm: 65, md: 75 },
-                height: { xs: 50, sm: 60, md: 70 },
+              imageSx={{
+                width: isSmallDevice
+                  ? "55px"
+                  : isMediumDevice
+                    ? "70px"
+                    : "80px",
+                height: isSmallDevice
+                  ? "55px"
+                  : isMediumDevice
+                    ? "70px"
+                    : "80px",
               }}
             />
             <Typography
