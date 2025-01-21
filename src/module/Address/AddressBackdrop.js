@@ -6,6 +6,7 @@ import {
   FormControlLabel,
   Checkbox,
   Backdrop,
+  Grid,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,8 +18,11 @@ import { useFormik } from "formik";
 
 import { addressValidationSchema } from "@/src/utils/formvalidation/addressValidationSchema";
 import CustomTextField from "@/src/components/TextField/Textfield";
-import CustomAutoComplete from "@/src/Components/Autocomplete/CustumAutocomplete";
-import CaspianButton from "@/src/Components/Button/Button";
+import CustomAutoComplete from "@/src/components/Autocomplete/CustumAutocomplete";
+import CaspianButton from "@/src/components/Button/Button";
+import styles from "./Address.module.scss"
+import Image from "next/image";
+
 
 const AddAddressBackdrop = ({ open, onClose }) => {
   const dispatch = useDispatch();
@@ -63,31 +67,11 @@ const AddAddressBackdrop = ({ open, onClose }) => {
         zIndex:9000
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          backgroundColor: { xs: "#fff", md: "rgba(0,0,0,0.3)" },
-          overflowY: "auto",
-          paddingTop: { xs: "20px", md: 0 },
-          paddingBottom: { xs: "20px", md: 0 },
-         
-        }}
-       
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", md: "row" },
-            width: "80%",
-            margin: "auto",
-          }}
+      <Grid className={styles.Container}>
+        <div className={styles.contentBox}
           onClick={(e) => e.stopPropagation()}
         >
-          <Box p={3} bgcolor="#fff" borderRadius={2} width="400px">
+          <Grid p={3} bgcolor="#fff" borderRadius={2} width="400px">
             <Typography variant="h6" mb={2}>
               Add Address
             </Typography>
@@ -164,39 +148,30 @@ const AddAddressBackdrop = ({ open, onClose }) => {
                   }
                   label="Set as default address"
                 />
-                <Box textAlign="left">
+                <Stack textAlign="left">
                   <CaspianButton type="submit" variant="custom" color="#fff">
                     Save Address & Proceed
                   </CaspianButton>
-                </Box>
+                </Stack>
               </Stack>
             </form>
-          </Box>
-          <Box
-            sx={{
-              flex: 1,
-              height: { xs: "300px", md: "500px" },
-              marginLeft: { xs: 0 },
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: "10px",
-              margin: "auto",
-            }}
-          >
-            <img
+          </Grid>
+          <Stack className={styles.imageBox}>
+            <Image
+            width={1000}
+            height={1000}
               src="/map.png"
               alt="Map Placeholder"
               style={{
-                width: "100%",
-                height: "100%",
+                width:"100%",
+                height:"100%",
                 borderRadius: "8px",
                 objectFit: "cover",
               }}
             />
-          </Box>
-        </Box>
-      </Box>
+          </Stack>
+        </div>
+      </Grid>
     </Backdrop>
   );
 };
