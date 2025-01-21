@@ -19,7 +19,6 @@ import { store } from '../../utils/store';
 import CaspianButton from '../Button/Button';
 import Stack from '@mui/material/Stack';
 
-
 const Header = () => {
   const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -107,28 +106,17 @@ const Header = () => {
                   {link.title}
                 </Typography>
               ))}
-              <CaspianButton
-                variant="tertiary"
+              <CaspianButton  
+                variant="custom2"
                 size="medium"
-                sx={{
-                  border: '1px solid #34A76C',
-                  color: '#34A76C',
-                  borderRadius: '5px',
-                  padding: '5px 20px',
-                }}
                 onClick={() => setIsLoginOpen(true)}
               >
                 Log in
               </CaspianButton>
               <CaspianButton
-                variant="primary"
+                variant="custom"
                 size="medium"
-                sx={{
-                  backgroundColor: '#34A76C',
-                  color: '#ffffff',
-                  borderRadius: '5px',
-                  padding: '5px 20px',
-                }}
+               
                 onClick={() => setIsSignUpOpen(true)}
               >
                 Sign Up
@@ -159,28 +147,16 @@ const Header = () => {
           }}
         >
           <CaspianButton
-            variant="tertiary"
+            variant="custom2"
             size="medium"
-            sx={{
-              border: '1px solid #34A76C',
-              color: '#34A76C',
-              borderRadius: '5px',
-              padding: '5px 15px',
-            }}
-            onClick={() => setIsLoginOpen(true)} // Open Login Modal
+            onClick={() => setIsLoginOpen(true)} 
           >
             Log in
           </CaspianButton>
           <CaspianButton
-            variant="primary"
+            variant="custom"
             size="medium"
-            sx={{
-              backgroundColor: '#34A76C',
-              color: '#ffffff',
-              borderRadius: '5px',
-              padding: '5px 15px',
-            }}
-            onClick={() => setIsSignUpOpen(true)} // Open Sign Up Modal
+            onClick={() => setIsSignUpOpen(true)}
           >
             Sign Up
           </CaspianButton>
