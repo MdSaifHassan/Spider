@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { Grid, Box, Typography, Backdrop, Divider } from "@mui/material";
+import React, { useState, useCallback, useMemo } from "react";
+import { Grid, Box, Typography, Backdrop, Divider, Stack } from "@mui/material";
 import AddAddressBackdrop from "@/src/module/Address/AddressBackdrop";
 import { useSelector, useDispatch } from "react-redux";
 import { FaPlus, FaRegDotCircle, FaTrash } from "react-icons/fa";
@@ -12,19 +12,82 @@ import mechanicData from "@/src/utils/adressData/mechanicData";
 
 const AddressPage = () => {
   const [backdropOpen, setBackdropOpen] = useState(false);
+
   const addresses = useSelector((state) => state.address.addresses);
   const defaultAddressId = useSelector(
     (state) => state.address.defaultAddressId
   );
+
   const dispatch = useDispatch();
 
-  const handleDeleteAddress = (id) => {
-    dispatch(deleteAddress(id));
-  };
+  const handleDeleteAddress = useCallback(
+    (id) => {
+      dispatch(deleteAddress(id));
+    },
+    [dispatch]
+  );
 
-  const handleSelectAddress = (id) => {
+  const handleSelectAddress = useCallback((id) => {
     alert(`Address ID ${id} selected!`);
-  };
+  }, []);
+
+  const addressCards = useMemo(() => {
+    return addresses.map((address, index) => (
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        md={5}
+        key={address.id}
+        sx={{
+          minWidth: { xs: "300px", sm: "300px", md: "300px" },
+          minHeight: { xs: "200px", sm: "200px", md: "200px" },
+        }}
+      >
+        <FeatureCard
+          iconsx={{
+            borderRadius: "100%",
+            width: "40px",
+            height: "40px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 0px 15px",
+          }}
+          showIcon
+          icon={
+            <Box>
+              {defaultAddressId === address.id ? (
+                <FiHome size={20} color="#009688" />
+              ) : (
+                <FiHome size={20} color="#009688" />
+              )}
+            </Box>
+          }
+          variant="custom"
+          size="small"
+          showTitle
+          title={`Address ${index + 1}`}
+          showDescription
+          description={`${address.address}, ${address.city}, ${address.state}`}
+          showButton
+          buttonText="Select"
+          onButtonClick={() => handleSelectAddress(address.id)}
+          additionalButton={
+            <CaspianButton
+              variant="secondary"
+              color="error"
+              buttonText="Delete"
+              startIcon={<FaTrash />}
+              onClick={() => handleDeleteAddress(address.id)}
+            >
+              Delete
+            </CaspianButton>
+          }
+        />
+      </Grid>
+    ));
+  }, [addresses, defaultAddressId, handleDeleteAddress, handleSelectAddress]);
 
   return (
     <Box
@@ -73,7 +136,6 @@ const AddressPage = () => {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                
                 showIcon
                 icon={
                   <Box sx={{ fontSize: 40 }}>
@@ -90,62 +152,7 @@ const AddressPage = () => {
                 onButtonClick={() => setBackdropOpen(true)}
               />
             </Grid>
-
-            {addresses.map((address, index) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={5}
-                key={address.id}
-                sx={{
-                  minWidth: { xs: "300px", sm: "300px", md: "300px" },
-                  minHeight: { xs: "200px", sm: "200px", md: "200px" },
-                }}
-              >
-                <FeatureCard
-                  iconsx={{
-                    borderRadius: "100%",
-                    width: "40px",
-                    height: "40px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 0px 15px",
-                  }}
-                  showIcon
-                  icon={
-                    <Box>
-                      {defaultAddressId === address.id ? (
-                        <FiHome size={20} color="#009688" />
-                      ) : (
-                        <FiHome size={20} color="#009688" />
-                      )}
-                    </Box>
-                  }
-                  variant="custom"
-                  size="small"
-                  showTitle
-                  title={`Address ${index + 1}`}
-                  showDescription
-                  description={`${address.address}, ${address.city}, ${address.state}`}
-                  showButton
-                  buttonText="Select"
-                  onButtonClick={() => handleSelectAddress(address.id)}
-                  additionalButton={
-                    <CaspianButton
-                      variant="secondary"
-                      color="error"
-                      buttonText="Delete"
-                      startIcon={<FaTrash />}
-                      onClick={() => handleDeleteAddress(address.id)}
-                    >
-                      Delete
-                    </CaspianButton>
-                  }
-                />
-              </Grid>
-            ))}
+            {addressCards}
           </Grid>
         </Grid>
         <Grid item xs={12} md={3.5}>
@@ -203,51 +210,55 @@ const AddressPage = () => {
             ))}
 
             <Divider sx={{ my: 2 }} />
-
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography variant="body1" color="#009688">
-                Total
-              </Typography>
-              <Typography variant="body1" color="#F2C94C">
-                ${mechanicData.total}
-              </Typography>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography variant="body1" color="#009688">
-                Discount
-              </Typography>
-              <Typography variant="body1" color="#F2C94C">
-                ${mechanicData.discount}
-              </Typography>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{ fontWeight: "bold" }}
-            >
-              <Typography variant="body1" color="#009688">
-                Payable
-              </Typography>
-              <Typography variant="body1" color="#F2C94C">
-                ${mechanicData.payable}
-              </Typography>
-            </Box>
-            <Box justifyContent={"center"} display={"flex"} mt={2}>
-              <CaspianButton size="large" title="Pay Here" variant="custom" />
-            </Box>
+            <Grid pl={4}>
+              <Stack
+                // display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="row"
+              >
+                <Typography variant="body1" color="#009688">
+                  Total
+                </Typography>
+                <Typography variant="body1" color="#F2C94C">
+                  ${mechanicData.total}
+                </Typography>
+              </Stack>
+              <Stack
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="row"
+              >
+                <Typography variant="body1" color="#009688">
+                  Discount
+                </Typography>
+                <Typography variant="body1" color="#F2C94C">
+                  ${mechanicData.discount}
+                </Typography>
+              </Stack>
+              <Stack
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="row"
+                mb={2}
+              >
+                <Typography variant="body1" color="#009688">
+                  Payable
+                </Typography>
+                <Typography variant="body1" color="#F2C94C">
+                  ${mechanicData.payable}
+                </Typography>
+              </Stack>
+              <Stack mt={2} width="60%" margin={"auto"} >
+                <CaspianButton size="medium" title="Pay Here" variant="custom" />
+              </Stack>
+            </Grid>
           </Box>
         </Grid>
       </Grid>
-      <Box open={backdropOpen} onClick={() => setBackdropOpen(false)}>
+      <Box>
         <AddAddressBackdrop
           open={backdropOpen}
           onClose={() => setBackdropOpen(false)}
