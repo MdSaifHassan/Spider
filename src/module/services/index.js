@@ -13,6 +13,7 @@ const ExploreServices = () => {
 
     return (
         <Box
+            id="services"
             sx={{
                 py: 4,
                 px: { xs: 2, sm: 3, md: 2 },
@@ -35,17 +36,16 @@ const ExploreServices = () => {
                             fontWeight: "bold",
                             color: "#34A76C",
                             fontSize: { xs: "20px", sm: "24px", md: "36px" },
-                            textAlign: isMediumDevice ? "center" : "left", 
                         }}
                     >
-                        {servicesData.heading} 
+                        {servicesData.heading}
                     </Typography>
                 </Grid>
             </Grid>
 
             <Carousel
-                items={servicesData.items} 
-                showButtons={!isSmallDevice} 
+                items={servicesData.items}
+                showButtons={!isSmallDevice}
                 settings={{
                     dots: isSmallDevice,
                 }}
@@ -53,25 +53,23 @@ const ExploreServices = () => {
                     <Box sx={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                         {/* Feature Card */}
                         <FeatureCard
-                            showImage={true} 
+                            showImage={true}
                             image={item.image}
                             sx={{
-                                width: { xs: 100, sm: 140, md: 160 }, 
-                                height: { xs: 90, sm: 130, md: 150 }, 
-                                boxShadow: 2,
-                                borderRadius: "10px",
-                                transition: "transform 0.3s",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                "&:hover": { transform: "scale(1.05)" },
+                                width: { xs: 100, sm: 140, md: 160 },
+                                height: { xs: 90, sm: 130, md: 150 },
                             }}
-                            boxSx={{
-                                width: { xs: 60, sm: 80, md: 100 }, 
-                                height: { xs: 40, sm: 60, md: 70 }, 
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
+                            imageSx={{
+                                width: isSmallDevice
+                                    ? "65px"
+                                    : isMediumDevice
+                                        ? "90px"
+                                        : "115px",
+                                height: isSmallDevice
+                                    ? "50px"
+                                    : isMediumDevice
+                                        ? "65px"
+                                        : "80px",
                             }}
                         />
 
@@ -81,7 +79,7 @@ const ExploreServices = () => {
                             sx={{
                                 mt: 2,
                                 color: "#000",
-                                fontSize: { xs: "12px", sm: "14px", md: "16px" }, 
+                                fontSize: { xs: "12px", sm: "14px", md: "16px" },
                             }}
                         >
                             {item.title}
@@ -94,3 +92,5 @@ const ExploreServices = () => {
 };
 
 export default ExploreServices;
+
+

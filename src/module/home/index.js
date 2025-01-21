@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Stack } from "@mui/material";
 import homeData from "@/src/helpers/HomeData";
 import Form from "@/src/module/home/Form/form";
 import { Provider } from "react-redux";
@@ -23,17 +23,24 @@ export default function HomeSection() {
   return (
     <Provider store={store}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Box className={styles.mainContainer}>
-          <Box className={styles.backgroundSection}>
-            <Box className={styles.textSection}>
+        <Stack
+          id="home"
+          className={styles.mainContainer}
+          direction="column"
+        >
+          {/* Background and Text Section */}
+          <Stack className={styles.backgroundSection} direction="column">
+            {/* Text Section */}
+            <Stack className={styles.textSection} direction="column">
               <Typography variant="h1" className={styles.heading}>
                 <span>{homeData.heading}</span> {homeData.subheading}
               </Typography>
               <Typography variant="body1" className={styles.description}>
                 {homeData.description}
               </Typography>
-            </Box>
+            </Stack>
 
+            {/* Carousel Section */}
             <Box className={styles.carouselSection}>
               <Carousel
                 items={homeData.carouselItems}
@@ -62,12 +69,13 @@ export default function HomeSection() {
                 }}
               />
             </Box>
-          </Box>
+          </Stack>
 
+          {/* Form Section */}
           <Box className={styles.formContainer}>
             <Form />
           </Box>
-        </Box>
+        </Stack>
       </LocalizationProvider>
     </Provider>
   );
