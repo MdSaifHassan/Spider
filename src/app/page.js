@@ -1,15 +1,16 @@
 'use client';
 
-import AboutUs from "../module/aboutUs/page";
-import ExploreServices from "../module/services/page";
-import WhyUs from "../module/whyUs/page";
-import Subscription from "../module/subscription/page";
+
+import AboutUs from "../module/aboutUs";
 import ClientCarousel from "../module/client/page";
-import FAQSection from "../module/faq/page";
-import HomeSection from "../module/home/page";
+import FAQSection from "../module/faq";
+import HomeSection from "../module/Home/page";
+import ExploreServices from "../module/services/page";
+import Subscription from "../module/subscription/page";
+import WhyUs from "../module/whyUs";
 
 export default function Home() {
-  return (
+  return (  
 
     <div>
       {/* Main Content */}
@@ -28,6 +29,7 @@ export default function Home() {
 
       <div id="testimonials">
         <ClientCarousel />
+
       </div>
 
       <div id="faq">
