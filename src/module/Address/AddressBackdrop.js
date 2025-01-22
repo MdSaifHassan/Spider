@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import {
   Box,
   Typography,
@@ -20,14 +20,36 @@ import { addressValidationSchema } from "@/src/utils/formvalidation/addressValid
 import CustomTextField from "@/src/components/TextField/Textfield";
 import CustomAutoComplete from "@/src/components/Autocomplete/CustumAutocomplete";
 import CaspianButton from "@/src/components/Button/Button";
-import styles from "./Address.module.scss"
+import styles from "./Address.module.scss";
 import Image from "next/image";
-
 
 const AddAddressBackdrop = ({ open, onClose }) => {
   const dispatch = useDispatch();
   const [setAsDefault, setSetAsDefault] = useState(false);
   const addresses = useSelector((state) => state.address.addresses);
+
+  const defaultAddressId = useMemo(() => (addresses.length > 0 ? addresses[0].id : null), [addresses]);
+
+  const handleAddressSubmission = useCallback(
+    (values) => {
+      if (setAsDefault && addresses.length > 0) {
+        const updatedAddress = {
+          ...addresses[0],
+          ...values,
+          id: defaultAddressId,
+        };
+        dispatch(updateAddress(updatedAddress));
+        dispatch(setDefaultAddress(updatedAddress.id));
+      } else {
+        const newAddress = { ...values, id: Date.now() };
+        dispatch(addAddress(newAddress));
+        if (setAsDefault) {
+          dispatch(setDefaultAddress(newAddress.id));
+        }
+      }
+    },
+    [dispatch, addresses, setAsDefault, defaultAddressId]
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -39,21 +61,7 @@ const AddAddressBackdrop = ({ open, onClose }) => {
     },
     validationSchema: addressValidationSchema,
     onSubmit: (values) => {
-      if (setAsDefault && addresses.length > 0) {
-        const updatedAddress = {
-          ...addresses[0],
-          ...values,
-          id: addresses[0].id,
-        };
-        dispatch(updateAddress(updatedAddress));
-        dispatch(setDefaultAddress(updatedAddress.id));
-      } else {
-        const newAddress = { ...values, id: Date.now() };
-        dispatch(addAddress(newAddress));
-        if (setAsDefault) {
-          dispatch(setDefaultAddress(newAddress.id));
-        }
-      }
+      handleAddressSubmission(values);
       formik.resetForm();
       onClose();
     },
@@ -64,11 +72,12 @@ const AddAddressBackdrop = ({ open, onClose }) => {
       open={open}
       onClick={onClose}
       style={{
-        zIndex:9000
+        zIndex: 9000,
       }}
     >
       <Grid className={styles.Container}>
-        <div className={styles.contentBox}
+        <div
+          className={styles.contentBox}
           onClick={(e) => e.stopPropagation()}
         >
           <Grid p={3} bgcolor="#fff" borderRadius={2} width="400px">
@@ -158,13 +167,13 @@ const AddAddressBackdrop = ({ open, onClose }) => {
           </Grid>
           <Stack className={styles.imageBox}>
             <Image
-            width={1000}
-            height={1000}
+              width={1000}
+              height={1000}
               src="/map.png"
               alt="Map Placeholder"
               style={{
-                width:"100%",
-                height:"100%",
+                width: "100%",
+                height: "100%",
                 borderRadius: "8px",
                 objectFit: "cover",
               }}

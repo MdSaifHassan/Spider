@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { Grid, Box, Typography, Backdrop, Divider } from "@mui/material";
+import React, { useState, useCallback } from "react";
+import { Grid, Box, Typography, Backdrop, Divider, Stack } from "@mui/material";
 import AddAddressBackdrop from "@/src/module/Address/AddressBackdrop";
 import { useSelector, useDispatch } from "react-redux";
 import { FaPlus, FaRegDotCircle, FaTrash } from "react-icons/fa";
@@ -12,19 +12,24 @@ import mechanicData from "@/src/utils/adressData/mechanicData";
 
 const AddressPage = () => {
   const [backdropOpen, setBackdropOpen] = useState(false);
+
   const addresses = useSelector((state) => state.address.addresses);
   const defaultAddressId = useSelector(
     (state) => state.address.defaultAddressId
   );
+
   const dispatch = useDispatch();
 
-  const handleDeleteAddress = (id) => {
-    dispatch(deleteAddress(id));
-  };
+  const handleDeleteAddress = useCallback(
+    (id) => {
+      dispatch(deleteAddress(id));
+    },
+    [dispatch]
+  );
 
-  const handleSelectAddress = (id) => {
+  const handleSelectAddress = useCallback((id) => {
     alert(`Address ID ${id} selected!`);
-  };
+  }, []);
 
   return (
     <Box
@@ -73,7 +78,6 @@ const AddressPage = () => {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                
                 showIcon
                 icon={
                   <Box sx={{ fontSize: 40 }}>
@@ -90,7 +94,6 @@ const AddressPage = () => {
                 onButtonClick={() => setBackdropOpen(true)}
               />
             </Grid>
-
             {addresses.map((address, index) => (
               <Grid
                 item
@@ -203,51 +206,52 @@ const AddressPage = () => {
             ))}
 
             <Divider sx={{ my: 2 }} />
-
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography variant="body1" color="#009688">
-                Total
-              </Typography>
-              <Typography variant="body1" color="#F2C94C">
-                ${mechanicData.total}
-              </Typography>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography variant="body1" color="#009688">
-                Discount
-              </Typography>
-              <Typography variant="body1" color="#F2C94C">
-                ${mechanicData.discount}
-              </Typography>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              sx={{ fontWeight: "bold" }}
-            >
-              <Typography variant="body1" color="#009688">
-                Payable
-              </Typography>
-              <Typography variant="body1" color="#F2C94C">
-                ${mechanicData.payable}
-              </Typography>
-            </Box>
-            <Box justifyContent={"center"} display={"flex"} mt={2}>
-              <CaspianButton size="large" title="Pay Here" variant="custom" />
-            </Box>
+            <Grid pl={4}>
+              <Stack
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="row"
+              >
+                <Typography variant="body1" color="#009688">
+                  Total
+                </Typography>
+                <Typography variant="body1" color="#F2C94C">
+                  ${mechanicData.total}
+                </Typography>
+              </Stack>
+              <Stack
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="row"
+              >
+                <Typography variant="body1" color="#009688">
+                  Discount
+                </Typography>
+                <Typography variant="body1" color="#F2C94C">
+                  ${mechanicData.discount}
+                </Typography>
+              </Stack>
+              <Stack
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="row"
+                mb={2}
+              >
+                <Typography variant="body1" color="#009688">
+                  Payable
+                </Typography>
+                <Typography variant="body1" color="#F2C94C">
+                  ${mechanicData.payable}
+                </Typography>
+              </Stack>
+              <Stack mt={2} width="60%" margin={"auto"}>
+                <CaspianButton size="medium" title="Pay Here" variant="custom" />
+              </Stack>
+            </Grid>
           </Box>
         </Grid>
       </Grid>
-      <Box open={backdropOpen} onClick={() => setBackdropOpen(false)}>
+      <Box>
         <AddAddressBackdrop
           open={backdropOpen}
           onClose={() => setBackdropOpen(false)}
