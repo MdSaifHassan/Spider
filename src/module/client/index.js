@@ -45,7 +45,9 @@ const ClientCarousel = () => {
                                 height={40}
                             />
 
-                            <Typography variant="body1">{item.review}</Typography>
+                            <Typography variant="body1" sx={{
+                                fontSize: { xs: "14px", sm: "16px" },
+                            }}>{item.review}</Typography>
 
                             {/* Closing Quote */}
                             <Image

@@ -88,7 +88,7 @@ const Footer = () => {
                   }}
                   titleSx={{ fontWeight: 'bold', fontSize: '16px', color: '#34A76C' }}
                   collapseSx={{ paddingLeft: '10px', marginTop: '5px' }}
-                  itemSx={{ fontWeight: 'bold', color: '#555', marginBottom: '5px' }}
+                  itemSx={{ fontSize: '14px' ,color: '#555', marginBottom: '5px' }}
                 />
               </Grid>
             ))}

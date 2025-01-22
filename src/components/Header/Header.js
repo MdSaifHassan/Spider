@@ -114,9 +114,8 @@ const Header = () => {
                 Log in
               </CaspianButton>
               <CaspianButton
-                variant="custom"
+                variant="custom3"
                 size="medium"
-               
                 onClick={() => setIsSignUpOpen(true)}
               >
                 Sign Up
@@ -154,7 +153,7 @@ const Header = () => {
             Log in
           </CaspianButton>
           <CaspianButton
-            variant="custom"
+            variant="custom3"
             size="medium"
             onClick={() => setIsSignUpOpen(true)}
           >
