@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 import { Grid, Box, Typography, Backdrop, Divider, Stack } from "@mui/material";
 import AddAddressBackdrop from "@/src/module/Address/AddressBackdrop";
 import { useSelector, useDispatch } from "react-redux";
@@ -30,64 +30,6 @@ const AddressPage = () => {
   const handleSelectAddress = useCallback((id) => {
     alert(`Address ID ${id} selected!`);
   }, []);
-
-  const addressCards = useMemo(() => {
-    return addresses.map((address, index) => (
-      <Grid
-        item
-        xs={12}
-        sm={6}
-        md={5}
-        key={address.id}
-        sx={{
-          minWidth: { xs: "300px", sm: "300px", md: "300px" },
-          minHeight: { xs: "200px", sm: "200px", md: "200px" },
-        }}
-      >
-        <FeatureCard
-          iconsx={{
-            borderRadius: "100%",
-            width: "40px",
-            height: "40px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 0px 15px",
-          }}
-          showIcon
-          icon={
-            <Box>
-              {defaultAddressId === address.id ? (
-                <FiHome size={20} color="#009688" />
-              ) : (
-                <FiHome size={20} color="#009688" />
-              )}
-            </Box>
-          }
-          variant="custom"
-          size="small"
-          showTitle
-          title={`Address ${index + 1}`}
-          showDescription
-          description={`${address.address}, ${address.city}, ${address.state}`}
-          showButton
-          buttonText="Select"
-          onButtonClick={() => handleSelectAddress(address.id)}
-          additionalButton={
-            <CaspianButton
-              variant="secondary"
-              color="error"
-              buttonText="Delete"
-              startIcon={<FaTrash />}
-              onClick={() => handleDeleteAddress(address.id)}
-            >
-              Delete
-            </CaspianButton>
-          }
-        />
-      </Grid>
-    ));
-  }, [addresses, defaultAddressId, handleDeleteAddress, handleSelectAddress]);
 
   return (
     <Box
@@ -152,7 +94,61 @@ const AddressPage = () => {
                 onButtonClick={() => setBackdropOpen(true)}
               />
             </Grid>
-            {addressCards}
+            {addresses.map((address, index) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={5}
+                key={address.id}
+                sx={{
+                  minWidth: { xs: "300px", sm: "300px", md: "300px" },
+                  minHeight: { xs: "200px", sm: "200px", md: "200px" },
+                }}
+              >
+                <FeatureCard
+                  iconsx={{
+                    borderRadius: "100%",
+                    width: "40px",
+                    height: "40px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 0px 15px",
+                  }}
+                  showIcon
+                  icon={
+                    <Box>
+                      {defaultAddressId === address.id ? (
+                        <FiHome size={20} color="#009688" />
+                      ) : (
+                        <FiHome size={20} color="#009688" />
+                      )}
+                    </Box>
+                  }
+                  variant="custom"
+                  size="small"
+                  showTitle
+                  title={`Address ${index + 1}`}
+                  showDescription
+                  description={`${address.address}, ${address.city}, ${address.state}`}
+                  showButton
+                  buttonText="Select"
+                  onButtonClick={() => handleSelectAddress(address.id)}
+                  additionalButton={
+                    <CaspianButton
+                      variant="secondary"
+                      color="error"
+                      buttonText="Delete"
+                      startIcon={<FaTrash />}
+                      onClick={() => handleDeleteAddress(address.id)}
+                    >
+                      Delete
+                    </CaspianButton>
+                  }
+                />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
         <Grid item xs={12} md={3.5}>
@@ -212,7 +208,6 @@ const AddressPage = () => {
             <Divider sx={{ my: 2 }} />
             <Grid pl={4}>
               <Stack
-                // display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 flexDirection="row"
@@ -225,7 +220,6 @@ const AddressPage = () => {
                 </Typography>
               </Stack>
               <Stack
-                display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 flexDirection="row"
@@ -238,7 +232,6 @@ const AddressPage = () => {
                 </Typography>
               </Stack>
               <Stack
-                display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 flexDirection="row"
@@ -251,7 +244,7 @@ const AddressPage = () => {
                   ${mechanicData.payable}
                 </Typography>
               </Stack>
-              <Stack mt={2} width="60%" margin={"auto"} >
+              <Stack mt={2} width="60%" margin={"auto"}>
                 <CaspianButton size="medium" title="Pay Here" variant="custom" />
               </Stack>
             </Grid>
