@@ -8,12 +8,14 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    
+    h6 {
+      font-weight: bold ;
+    color: #34a76c;
+    }
   }
   
-  .logoText {
-    font-weight: bold !important;
-    color: #34a76c;
-  }
+
   
   .socialIcon {
     font-size: 20px;
@@ -37,6 +39,7 @@
     font-weight: bold !important;
     margin-bottom: 8px !important;
     color: #34a76c;
+    
   }
   
   .linkItem {

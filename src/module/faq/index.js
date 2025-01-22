@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useMemo } from "react";
+
+import React, { useState } from "react";
 import { Box, Typography, Grid, Stack } from "@mui/material";
 import faqData from "@/src/helpers/faqData";
 import TabComponent from "@/src/components/Tab/TabComponent";
@@ -10,39 +11,6 @@ const FAQSection = () => {
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
-
-  const memoizedFAQContent = useMemo(() => {
-    return (
-      <Grid container spacing={3} sx={{ mt: 1 }}>
-        {faqData[selectedTab]?.questions?.map((item, index) => (
-          <Grid item xs={12} md={6} key={index}>
-            <Stack spacing={1} sx={{ px: 1 }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: "bold",
-                  color: "#333",
-                  fontSize: { xs: "16px", sm: "20px" },
-                }}
-              >
-                {item.question}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  color: "#666",
-                  lineHeight: 1.6,
-                  fontSize: { xs: "14px", sm: "16px" },
-                }}
-              >
-                {item.answer}
-              </Typography>
-            </Stack>
-          </Grid>
-        ))}
-      </Grid>
-    );
-  }, [selectedTab]);
 
   return (
     <Box
@@ -79,7 +47,34 @@ const FAQSection = () => {
       />
 
       {/* FAQ Content */}
-      {memoizedFAQContent}
+      <Grid container spacing={3} sx={{ mt: 1 }}>
+        {faqData[selectedTab]?.questions?.map((item, index) => (
+          <Grid item xs={12} md={6} key={index}>
+            <Stack spacing={1} sx={{ px: 1 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "bold",
+                  color: "#333",
+                  fontSize: { xs: "16px", sm: "20px" },
+                }}
+              >
+                {item.question}
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  color: "#666",
+                  lineHeight: 1.6,
+                  fontSize: { xs: "14px", sm: "16px" },
+                }}
+              >
+                {item.answer}
+              </Typography>
+            </Stack>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };

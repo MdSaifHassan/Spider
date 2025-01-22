@@ -29,18 +29,18 @@
     }
 
     .title {
-        font-size: 24px !important;
-        font-weight: bold !important;
+        font-size: 24px;
+        font-weight: bold;
         color: #34A76C;
         text-align: center;
 
         @media (min-width: 600px) {
-            font-size: 28px !important;
+            font-size: 28px;
             text-align: left;
         }
 
         @media (min-width: 768px) {
-            font-size: 32px !important;
+            font-size: 32px;
         }
     }
 
