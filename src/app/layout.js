@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Container from "../components/Container/Container";
-import Footer from "../module/footer/page";
+import Footer from "../module/footer";
 import Header from "../components/Header/Header";
 
 

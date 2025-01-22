@@ -1,5 +1,3 @@
-
-
 'use client'
 import React from "react";
 import { Box, Grid, useMediaQuery, Typography, useTheme } from "@mui/material";
