@@ -74,13 +74,13 @@ const FeatureCard = ({
                 title={buttonText}
                 onClick={onButtonClick}
               />
-              {additionalButton && (
+            </Stack>
+          )}
+           {additionalButton && (
                 <Stack>
                   {additionalButton}
                 </Stack>
               )}
-            </Stack>
-          )}
         </Box>
 
         {children}

@@ -1,0 +1,55 @@
+.packagesSection {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+.featureGrid{
+  // background-color: red;
+  width: 300px;
+}
+
+  .rightSection {
+    position: sticky;
+    top: 1rem;
+    height: fit-content;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    .cartTitle {
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .rewardsButton {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .ucPromise {
+      margin-top: 1rem;
+      color: #6b7280;
+    }
+
+    ul {
+      margin: 0.5rem 0 0 1rem;
+      padding: 0;
+      list-style-type: disc;
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  .featureGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .sectionTitle {
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+}
