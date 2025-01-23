@@ -7,6 +7,7 @@ const CASPIAN_TO_MUI_VARIANTS = {
   tertiary: 'text',
   custom: 'contained',
   custom2: 'contained', 
+  custom3: 'contained', 
 };
 
 export const CaspianButton = ({
@@ -51,6 +52,12 @@ export const CaspianButton = ({
               borderRadius: '5px',
               padding: '5px 20px',
               boxShadow:"none"
+            }
+           : variant === 'custom3'
+          ? {
+              ...sx,
+              backgroundColor: '#34A76C',
+              color:"#fff",
             }
           : sx
       }

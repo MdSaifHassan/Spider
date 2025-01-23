@@ -106,18 +106,8 @@ const Subscription = () => {
                         />
                         <CaspianButton
                             title="Subscribe"
-                            variant="primary"
+                            variant="custom3"
                             size="medium"
-                            sx={{
-                                backgroundColor: "#34A76C",
-                                color: "#ffffff",
-                                textTransform: "capitalize",
-                                fontWeight: "bold",
-                                transition: "all 0.3s ease",
-                                "&:hover": {
-                                    backgroundColor: "#2e8d5d",
-                                },
-                            }}
                         />
                     </Stack>
                 </Stack>
