@@ -14,6 +14,7 @@ const FeatureCard = ({
     title = "",
     showDescription = false,
     description = "",
+    subdescription = "",
     showButton = false,
     buttonText = "",
     isSelected = false,
@@ -48,17 +49,16 @@ const FeatureCard = ({
                             <Typography variant="body2" color="textSecondary">
                                 {description}
                             </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                {subdescription}
+                            </Typography>
                         </Box>
                     )}
                 </Box>
 
 
 
-                {additionalButton && (
-                    <Stack>
-                        {additionalButton}
-                    </Stack>
-                )}
+                
                 <Stack>
                     {showImage && image && (
                         <Image
@@ -78,6 +78,11 @@ const FeatureCard = ({
                             onClick={onButtonClick}
                         />
                     )}
+                    {additionalButton && (
+                    <Stack>
+                        {additionalButton}
+                    </Stack>
+                )}
                 </Stack>
 
 
