@@ -27,6 +27,7 @@ export const CaspianButton = ({
   className = "", 
   DisableIcon,
   sx,
+  background="none",
   ...rest
 }) => {
   if (isIconButton) {

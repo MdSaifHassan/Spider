@@ -1,8 +1,8 @@
 import React from "react";
-  import Image from "next/image";
+import Image from "next/image";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import CaspianButton from "../Button/Button";
-  import styles from "./Card.module.scss";
+import styles from "./Card.module.scss";
 
 
 const FeatureCard = ({
@@ -24,29 +24,42 @@ const FeatureCard = ({
   variant,
   iconsx,
   additionalButton = null,
+  cardDirection = "row", 
+  cardAlignItems = "flex-start", 
+  cardJustifyContent = "flex-start", 
+  btnPOsitionRight= "23px",
+  btnPOsitionLeft,
+  btnPOsitionTop,
+  btnPOsitionBottom="25px"
 }) => {
   return (
     <Card
-        className={`${styles.featureCard} ${isSelected ? styles.selected : ""}`}
-        sx={{ ...sx }}
+      className={`${styles.featureCard} ${isSelected ? styles.selected : ""}`}
+      sx={{ ...sx ,position:"relative"}}
+      
+    >
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: cardDirection,
+          alignItems: cardAlignItems,
+          justifyContent: cardJustifyContent,
+          padding:"0px !important"
+        }}
       >
-        <CardContent sx={{ flexDirection: "row", display: "flex" }}>
-          <Stack spacing={2}>
-            {showImage && image && (
-              <Image
-                src={image}
-                alt="Card Image"
-                className={styles.cardImage}
-                style={imageSx}
-                width={85} 
-                height={85} 
-              />
-            )}
-             </Stack>
-
+        {showImage && image && (
+          <Image
+            src={image}
+            alt="Card Image"
+            className={styles.cardImage}
+            style={imageSx}
+            width={85}
+            height={85}
+          />
+        )}
 
         {showIcon && (
-          <Box mb={2} >
+          <Box mb={2}>
             <Box sx={{ mr: 2, ...iconsx }}>{icon}</Box>
           </Box>
         )}
@@ -67,7 +80,16 @@ const FeatureCard = ({
           )}
 
           {showButton && (
-            <Stack mt={2} display={"flex"} flexDirection={"row"} gap={2}>
+            <Stack mt={2} display={"flex"} gap={2}
+            sx={{
+             alignSelf:"end",
+             position:"absolute",
+             right:btnPOsitionRight,
+             left:btnPOsitionLeft,
+             top:btnPOsitionTop,
+             bottom:btnPOsitionBottom,
+            }}
+            >
               <CaspianButton
                 variant={variant}
                 size="medium"
@@ -76,11 +98,11 @@ const FeatureCard = ({
               />
             </Stack>
           )}
-           {additionalButton && (
-                <Stack>
-                  {additionalButton}
-                </Stack>
-              )}
+          {additionalButton && (
+            <Stack>
+              {additionalButton}
+            </Stack>
+          )}
         </Box>
 
         {children}
