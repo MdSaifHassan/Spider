@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Divider, ListItem, ListItemText, Grid, Box } from "@mui/material";
 import styles from "./PackagesSection.module.scss";
-import FeatureCard from "@/src/components/Card/Card"; // Assuming you have this component
+import FeatureCard from "@/src/components/Card/Card"; 
 import { packagesData } from "@/src/helpers/packagesData";
 import CaspianButton from "@/src/components/Button/Button";
 
