@@ -27,10 +27,12 @@ const FeatureCard = ({
   cardDirection = "row", 
   cardAlignItems = "flex-start", 
   cardJustifyContent = "flex-start", 
-  btnPOsitionRight= "23px",
+  btnPOsitionRight,
   btnPOsitionLeft,
   btnPOsitionTop,
-  btnPOsitionBottom="25px"
+  btnPOsitionBottom,
+  btnWidth,
+  btnPosition="absolute"
 }) => {
   return (
     <Card
@@ -82,8 +84,9 @@ const FeatureCard = ({
           {showButton && (
             <Stack mt={2} display={"flex"} gap={2}
             sx={{
+              width:btnWidth,
              alignSelf:"end",
-             position:"absolute",
+             position:btnPosition,
              right:btnPOsitionRight,
              left:btnPOsitionLeft,
              top:btnPOsitionTop,
@@ -99,7 +102,16 @@ const FeatureCard = ({
             </Stack>
           )}
           {additionalButton && (
-            <Stack>
+            <Stack
+            sx={{
+              alignSelf:"end",
+              position:btnPosition,
+              right:btnPOsitionRight,
+              left:btnPOsitionLeft,
+              top:btnPOsitionTop,
+              bottom:btnPOsitionBottom,
+             }}
+            >
               {additionalButton}
             </Stack>
           )}
