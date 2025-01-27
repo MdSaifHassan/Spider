@@ -1,32 +1,30 @@
-// packagesData.js
 export const packagesData = [
-    {
-      id: 1,
-      title: "Classic repairing ",
-      price: 785,
-      description: "2 hrs",
-         image:"/download.jpg"
-    },
-    {
-      id:2,
-      title: "Intense repairing ",
-      price: 950,
-      description: "laptop and pc ",
-      image:"/download.jpg"
-    },
-    {
-      id:3,
-      title: "Intense repairing ",
-      price: 950,
-      description: "laptop and pc ",
-         image:"/download.jpg"
-    },
-    {
-      id:4,
-      title: "Intense repairing ",
-      price: 950,
-      description: "laptop and pc ",
-         image:"/download.jpg"
-    },
-  ];
-  
+  {
+    title: "Intense Repairing",
+    price: 950,
+    oldPrice: 1100, 
+    description: "Comprehensive laptop and PC repair",
+    image: "/Rectangle 4.png", 
+  },
+  {
+    title: "Quick Fix",
+    price: 90,
+    oldPrice: 120, 
+    description: "Basic laptop and PC troubleshooting",
+    image: "/Rectangle 4.png",
+  },
+  {
+    title: "Hardware Installation",
+    price: 50,
+    oldPrice: 70, 
+    description: "Laptop and PC hardware setup",
+    image: "/Rectangle 4.png", 
+  },
+  {
+    title: "Car engine",
+    price: 50,
+    oldPrice: 70, 
+    description: "Laptop and PC hardware setup",
+    image: "/Rectangle 4.png", 
+  },
+];

@@ -1,9 +1,11 @@
+"use client";
 import React, { useState } from "react";
-import { Typography, Divider, ListItem, ListItemText, Grid, Box } from "@mui/material";
+import { Typography, Divider, Grid, Box, Stack } from "@mui/material";
 import styles from "./PackagesSection.module.scss";
-import FeatureCard from "@/src/components/Card/Card"; 
+import FeatureCard from "@/src/components/Card/Card";
 import { packagesData } from "@/src/helpers/packagesData";
 import CaspianButton from "@/src/components/Button/Button";
+import { FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
 
 const PackagesSection = () => {
   const [cart, setCart] = useState({
@@ -15,9 +17,7 @@ const PackagesSection = () => {
     const existingItem = cart.items.find((i) => i.title === item.title);
     if (existingItem) {
       const updatedItems = cart.items.map((i) =>
-        i.title === item.title
-          ? { ...i, quantity: i.quantity + 1 }
-          : i
+        i.title === item.title ? { ...i, quantity: i.quantity + 1 } : i
       );
       setCart({
         ...cart,
@@ -37,9 +37,7 @@ const PackagesSection = () => {
     const existingItem = cart.items.find((i) => i.title === item.title);
     if (existingItem && existingItem.quantity > 1) {
       const updatedItems = cart.items.map((i) =>
-        i.title === item.title
-          ? { ...i, quantity: i.quantity - 1 }
-          : i
+        i.title === item.title ? { ...i, quantity: i.quantity - 1 } : i
       );
       setCart({
         ...cart,
@@ -71,57 +69,80 @@ const PackagesSection = () => {
   };
 
   return (
-    <div className={styles.packagesSection}>
+    <Grid container spacing={2} className={styles.packagesSection}>
       {/* Left Section */}
       <Grid item xs={12} md={8} className={styles.leftSection}>
         <Typography variant="h5" className={styles.sectionTitle}>
           Packages
         </Typography>
-        <div className={styles.featureGrid}>
+        <Grid container spacing={2} className={styles.featureGrid}>
           {packagesData.map((packageData) => (
-            <FeatureCard
-              sx={{ width: "100%" }}
-              key={packageData.title}
-              title={packageData.title}
-              showTitle
-              description={`${packageData.description} 
-              - Price ${packageData.price}`} 
-              showDescription
-              additionalButton={
-                getItemQuantity(packageData.title) === 0 ? (
-                  <CaspianButton
-                    variant="secondary"
-                    size="small"
-                    onClick={() => handleAddToCart(packageData)}
-                  >
-                    Add
-                  </CaspianButton>
-                ) : (
-                  <Box className={styles.quantityControl}>
-                    <CaspianButton
-                      variant="secondary"
-                      size="small"
-                      isDisabled={getItemQuantity(packageData.title) === 1} 
-                      onClick={() => handleRemoveFromCart(packageData)}
-                    >
-                      -
-                    </CaspianButton>
-                    <Typography variant="body1" className={styles.quantity}>
-                      {getItemQuantity(packageData.title)}
-                    </Typography>
-                    <CaspianButton
-                      variant="secondary"
-                      size="small"
-                      onClick={() => handleAddToCart(packageData)}
-                    >
-                      +
-                    </CaspianButton>
-                  </Box>
-                )
-              }
-            />
+            <Grid item xs={12} sm={6} spacing={1} key={packageData.title}>
+              <Box className={styles.featureCardContainer}>
+                <FeatureCard
+                  cardDirection="row-reverse"
+                  cardJustifyContent="space-between"
+                  cardAlign="space-between"
+                  showTitle
+                  title={packageData.title}
+                  showDescription
+                  showImage
+                  image={packageData.image}
+                  imageSx={{ width: "6rem", height: "6rem" }}
+                  description={packageData.description}
+                  subDescription={
+                    <>
+                      Price ₹{packageData.price}{" "}
+                      <span className={styles.oldPrice}>
+                        ₹{packageData.oldPrice}
+                      </span>
+                    </>
+                  }
+                  showButton={getItemQuantity(packageData.title) === 0}
+                  btnPOsitionBottom={"0.2rem"}
+                  btnPOsitionRight={"1.7rem"}
+                  buttonText="Add"
+                  variant={"custom2"}
+                  size="small"
+                  onButtonClick={() => handleAddToCart(packageData)}
+                  additionalButton={
+                    getItemQuantity(packageData.title) > 0 && (
+                      <Stack direction="row" alignItems="center" spacing={1}>
+                        <CaspianButton
+                          variant="IconBtn"
+                          title={
+                            <span
+                              style={{ fontSize: "15px", fontWeight: "bold" }}
+                            >
+                              {getItemQuantity(packageData.title)}
+                            </span>
+                          }
+                          startIcon={
+                            <FaMinus
+                              size={12}
+                              style={{
+                                color:
+                                  getItemQuantity(packageData.title) === 1
+                                    ? "#888"
+                                    : "#34A76C",
+                              }}
+                            />
+                          }
+                          endIcon={<FaPlus size={12} color="#34A76C" />}
+                          onStartIconClick={() =>
+                            handleRemoveFromCart(packageData)
+                          }
+                          onEndIconClick={() => handleAddToCart(packageData)}
+                          DisableIcon={getItemQuantity(packageData.title) === 1}
+                        />
+                      </Stack>
+                    )
+                  }
+                />
+              </Box>
+            </Grid>
           ))}
-        </div>
+        </Grid>
       </Grid>
 
       {/* Right Section */}
@@ -129,51 +150,54 @@ const PackagesSection = () => {
         <Typography variant="h6" className={styles.cartTitle}>
           Cart
         </Typography>
-        {cart.items.length > 0 ? (
-          cart.items.map((item) => (
-            <div key={item.title} className={styles.cartItem}>
-              <Typography variant="body1">{item.title}</Typography>
-              <div className={styles.quantityControl}>
-                <CaspianButton
-                  variant="secondary"
-                  size="small"
-                  isDisabled={item.quantity === 1} 
-                  onClick={() => handleRemoveFromCart(item)}
-                >
-                  -
-                </CaspianButton>
-                <Typography variant="body1" className={styles.quantity}>
-                  {item.quantity}
+        <Box className={styles.cartContainer}>
+          {cart.items.length > 0 ? (
+            cart.items.map((item) => (
+              <Box key={item.title} className={styles.cartItem}>
+                <Typography variant="body1">{item.title}</Typography>
+                <Box className="actionButtons">
+                  <CaspianButton
+                    variant="IconBtn"
+                    title={
+                      <span style={{ fontSize: "15px", fontWeight: "bold" }}>
+                        {item.quantity}
+                      </span>
+                    }
+                    startIcon={
+                      <FaMinus
+                        size={14}
+                        style={{
+                          color: item.quantity === 1 ? "#888" : "#34A76C",
+                        }}
+                      />
+                    }
+                    endIcon={<FaPlus size={14} color="#34A76C" />}
+                    onStartIconClick={() => handleRemoveFromCart(item)}
+                    onEndIconClick={() => handleAddToCart(item)}
+                    DisableIcon={item.quantity === 1}
+                  />
+                </Box>
+                <Typography variant="body1" className="cartItemPrice">
+                  ₹{item.price * item.quantity}
                 </Typography>
                 <CaspianButton
-                  variant="secondary"
-                  size="small"
-                  onClick={() => handleAddToCart(item)}
-                >
-                  +
-                </CaspianButton>
-              </div>
-              <Typography variant="body1">
-                ₹{item.price * item.quantity}
-              </Typography>
-              <CaspianButton
-                variant="custom"
-                size="small"
-                onClick={() => handleRemoveAll(item)}
-              >
-                Remove Item
-              </CaspianButton>
-            </div>
-          ))
-        ) : (
-          <Typography variant="body2">Your cart is empty</Typography>
-        )}
+                  onEndIconClick={() => handleRemoveAll(item)}
+                  variant="outline"
+                  className="removeButton"
+                  endIcon={<FaTrashAlt color="red" />}
+                />
+              </Box>
+            ))
+          ) : (
+            <Typography variant="body2">Your cart is empty</Typography>
+          )}
+        </Box>
         <Divider sx={{ my: 2 }} />
-        <Typography variant="body1">
+        <Typography variant="body1" className={styles.total}>
           Total: ₹{cart.total.toFixed(2)}
         </Typography>
         <CaspianButton
-          variant="custom2"
+          variant="custom3"
           color="cta"
           className={styles.rewardsButton}
         >
@@ -182,13 +206,13 @@ const PackagesSection = () => {
         <Typography variant="body2" className={styles.ucPromise}>
           UC Promise
         </Typography>
-        <ListItem sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
-          <ListItemText>Verified Professionals</ListItemText>
-          <ListItemText>Safe Chemicals</ListItemText>
-          <ListItemText>Superior Stain Removal</ListItemText>
-        </ListItem>
+        <ul className={styles.ucPromiseList}>
+          <li>Verified Professionals</li>
+          <li>Safe Chemicals</li>
+          <li>Superior Stain Removal</li>
+        </ul>
       </Grid>
-    </div>
+    </Grid>
   );
 };
 

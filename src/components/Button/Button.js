@@ -110,7 +110,7 @@ export const CaspianButton = ({
               e.stopPropagation(); 
               onStartIconClick && onStartIconClick();
             }}
-            isDisabled={DisableIcon}
+            disabled={DisableIcon} 
           >
             {startIcon}
           </IconButton>
