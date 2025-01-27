@@ -157,6 +157,8 @@ const CheckoutPage = () => {
                       onButtonClick={() => handleAddToCart(item)}
                       showImage
                       image={item.image}
+                      btnPOsitionBottom={"30px"}
+                      btnPOsitionRight={"22px"}
                       variant="custom2"
                     />
                   </Grid>
