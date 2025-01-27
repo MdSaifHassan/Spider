@@ -91,6 +91,8 @@ const AddressPage = () => {
                 showButton
                 buttonText="Add New"
                 variant="custom"
+                 btnPosition="relative"
+                btnWidth={"50%"}
                 onButtonClick={() => setBackdropOpen(true)}
               />
             </Grid>
@@ -103,7 +105,7 @@ const AddressPage = () => {
                 key={address.id}
                 sx={{
                   minWidth: { xs: "300px", sm: "300px", md: "300px" },
-                  minHeight: { xs: "200px", sm: "200px", md: "200px" },
+                  minHeight: { xs: "200px", sm: "200px", md: "150px" },
                 }}
               >
                 <FeatureCard
@@ -116,6 +118,7 @@ const AddressPage = () => {
                     alignItems: "center",
                     boxShadow: "rgba(0, 0, 0, 0.35) 0px 0px 15px",
                   }}
+                  btnPosition="relative"
                   showIcon
                   icon={
                     <Box>
@@ -132,19 +135,25 @@ const AddressPage = () => {
                   title={`Address ${index + 1}`}
                   showDescription
                   description={`${address.address}, ${address.city}, ${address.state}`}
-                  showButton
-                  buttonText="Select"
-                  onButtonClick={() => handleSelectAddress(address.id)}
                   additionalButton={
-                    <CaspianButton
-                      variant="secondary"
-                      color="error"
-                      buttonText="Delete"
-                      startIcon={<FaTrash />}
-                      onClick={() => handleDeleteAddress(address.id)}
+                    <Box
+                      display="flex"
+                      gap={1}
                     >
-                      Delete
-                    </CaspianButton>
+                      <CaspianButton
+                        variant="custom"
+                        color="primary"
+                        buttonText="Select"
+                        title="Select"
+                        onClick={() => handleSelectAddress(address.id)}
+                      />
+                      <CaspianButton
+                        variant="custom"
+                       title={"delete"}
+                       onClick={() => handleDeleteAddress(address.id)}
+                      />
+                    </Box>
+                   
                   }
                 />
               </Grid>
