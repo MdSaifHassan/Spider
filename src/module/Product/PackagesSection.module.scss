@@ -1,55 +1,118 @@
 .packagesSection {
   display: flex;
-  justify-content: center;
-  padding: 2rem;
-.featureGrid{
-  // background-color: red;
-  width: 300px;
-}
+  justify-content: space-between;
+  padding: 6rem 0;
+  gap: 1rem;
+
+  .leftSection {
+    flex: 1;
+
+    .sectionTitle {
+      margin-bottom: 4rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #34A76C;
+    }
+
+  }
+  .oldPrice {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 0.8rem;
+    margin-left: 0.2rem; 
+  }
+  
 
   .rightSection {
-    position: sticky;
-    top: 1rem;
-    height: fit-content;
-    background-color: #f9f9f9;
-    padding: 1rem;
+    flex: 0 0 30%;
+    background: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
+    padding: 1rem;
 
     .cartTitle {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: #34A76C;
+    }
+    .cartContainer {
+      max-height: 60vh;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+    
+      .cartItem {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+    
+        .MuiTypography-root {
+          font-size: 1rem;
+          color: #333;
+        }
+    
+        .cartItemPrice {
+          font-size: 0.95rem;
+          color: #666;
+          text-align: center;
+        }
+    
+        .actionButtons {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+    
+        .removeButton {
+          text-align: center;
+        }
+      }
+    }
+    
+
+    .total {
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: right;
+      color: #222;
       margin-bottom: 1rem;
-      font-weight: 500;
     }
 
     .rewardsButton {
-      margin-top: 1rem;
-      font-size: 0.875rem;
+      display: block;
+      width: 100%;
+      padding: 0.8rem 0;
+      font-size: 1rem;
+      text-align: center;
+      color: #fff;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
     }
 
     .ucPromise {
-      margin-top: 1rem;
-      color: #6b7280;
+      font-size: 1rem;
+      color: #555;
+      margin-top: 1.5rem;
     }
 
-    ul {
-      margin: 0.5rem 0 0 1rem;
-      padding: 0;
-      list-style-type: disc;
+    .ucPromiseList {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin-top: 0.5rem;
 
       li {
+        font-size: 0.95rem;
+        color: #666;
         margin-bottom: 0.5rem;
       }
     }
   }
-
-  .featureGrid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .sectionTitle {
-    margin-bottom: 2rem;
-    font-weight: 600;
-  }
 }
+   
+
+
+

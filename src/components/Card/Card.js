@@ -14,6 +14,7 @@ const FeatureCard = ({
   title = "",
   showDescription = false,
   description = "",
+  subDescription, 
   showButton = false,
   buttonText = "",
   isSelected = false,
@@ -32,12 +33,13 @@ const FeatureCard = ({
   btnPOsitionTop,
   btnPOsitionBottom,
   btnWidth,
-  btnPosition="absolute"
+  btnPosition="absolute", 
+  cardAlign= "center",
 }) => {
   return (
     <Card
       className={`${styles.featureCard} ${isSelected ? styles.selected : ""}`}
-      sx={{ ...sx ,position:"relative"}}
+      sx={{ ...sx ,position:"relative", alignItems:cardAlign}}
       
     >
       <CardContent
@@ -77,6 +79,9 @@ const FeatureCard = ({
             <Box mb={2}>
               <Typography variant="body2" color="textSecondary">
                 {description}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {subDescription}
               </Typography>
             </Box>
           )}
