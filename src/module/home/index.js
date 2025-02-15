@@ -3,13 +3,13 @@
 import React from "react";
 import { Box, Typography, Stack } from "@mui/material";
 import homeData from "@/src/helpers/HomeData";
-import Form from "@/src/module/home/Form/form";
 import { Provider } from "react-redux";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { store } from "@/src/utils/store";
 import styles from "./HomeSection.module.scss";
 import Carousel from "@/src/components/Carousel/Carousel";
+import Form from "./Form/form";
 
 export default function HomeSection() {
   const renderCarouselItem = (item) => (
