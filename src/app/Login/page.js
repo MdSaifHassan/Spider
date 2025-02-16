@@ -6,39 +6,42 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Box, Link, Typography, Container, Paper } from "@mui/material";
 import validationSchema from "@/src/utils/formvalidation/LoginValidation";
-import { loginSuccess } from "@/src/utils/slices/authSlice";
-import axios from "axios";
+import { useLogin } from "@/src/api/api";
 import CustomTextField from "@/src/components/TextField/Textfield";
 import CaspianButton from "@/src/components/Button/Button";
+import { loginSuccess } from "@/src/utils/slices/authSlice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [apiError, setApiError] = useState("");
 
+  const { mutate, isLoading } = useLogin();
+
   const formik = useFormik({
     initialValues: {
       emailOrMobile: "",
       password: "",
     },
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit: async (values) => {
-      try {
-        setApiError("");
-        const response = await axios.post("http://139.59.59.238:8081/api/v1/userlogin", values);
+      setApiError("");
 
-        if (response.data.result === "success" && response.data.data.token) {
-          const { token, ...user } = response.data.data;
-          dispatch(loginSuccess({ token, user }));
-          sessionStorage.setItem("authToken", token);
-          router.push("/");
-        } else {
-          setApiError("Invalid Credentials, please try again.");
-        }
-      } catch (error) {
-        console.error("Login API Error:", error);
-        setApiError(error.response?.data?.message || "An unexpected error occurred.");
-      }
+      mutate(values, {
+        onSuccess: (data) => {
+          if (data?.result === "success" && data?.data?.token) {
+            const { token, ...user } = data.data;
+            dispatch(loginSuccess({ token, user }));
+            sessionStorage.setItem("authToken", token);
+            router.push("/");
+          } else {
+            setApiError("Invalid Credentials, please try again.");
+          }
+        },
+        onError: (error) => {
+          setApiError(error?.message || "An unexpected error occurred.");
+        },
+      });
     },
   });
 
@@ -61,6 +64,7 @@ const LoginPage = () => {
           <CustomTextField
             label="Email or Mobile"
             name="emailOrMobile"
+            autoComplete="email"
             value={formik.values.emailOrMobile}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -73,6 +77,7 @@ const LoginPage = () => {
             label="Password"
             name="password"
             type="password"
+            autoComplete="current-password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -100,6 +105,7 @@ const LoginPage = () => {
             <CaspianButton
               type="submit"
               variant="custom3"
+              disabled={isLoading}
               sx={{
                 minWidth: "120px",
                 fontSize: "16px",
@@ -108,7 +114,7 @@ const LoginPage = () => {
                 ":hover": { backgroundColor: "#2E8B57" },
               }}
             >
-              Login
+              {isLoading ? "Logging in..." : "Login"}
             </CaspianButton>
           </Box>
         </form>

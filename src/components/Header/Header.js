@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../utils/slices/authSlice"; 
-import { useRouter } from "next/navigation";
+import { logout } from "../../utils/slices/authSlice";
+import { useRouter, usePathname } from "next/navigation";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -19,6 +19,7 @@ import CaspianButton from "../Button/Button";
 
 const Header = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth?.isAuthenticated || false);
 
@@ -29,27 +30,30 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
-      const scrollPosition = window.scrollY + 200;
-      const sections = navLinks.map((link) => document.querySelector(link.path));
 
-      sections.forEach((section, index) => {
-        if (section) {
-          const { offsetTop, offsetHeight } = section;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveLink(navLinks[index].path);
+      if (pathname === "/") {
+        const scrollPosition = window.scrollY + 200;
+        const sections = navLinks.map((link) => document.querySelector(link.path));
+
+        sections.forEach((section, index) => {
+          if (section) {
+            const { offsetTop, offsetHeight } = section;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveLink(navLinks[index].path);
+            }
           }
-        }
-      });
+        });
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
 
   const handleNavigation = (path) => {
     if (path.startsWith("/")) {
-      router.push(path); // Navigate to a page
-    } else {
+      router.push(path);
+    } else if (pathname === "/") {
       const section = document.querySelector(path);
       if (section) {
         section.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -85,31 +89,35 @@ const Header = () => {
             Logo
           </Typography>
 
-          {/* Desktop Navigation */}
-          <Stack
-            direction="row"
-            spacing={3}
-            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
-          >
-            {navLinks.map((link, index) => (
-              <Typography
-                key={index}
-                onClick={() => handleNavigation(link.path)}
-                sx={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  color: activeLink === link.path ? "#34A76C" : "#A0A0A0",
-                  fontWeight: activeLink === link.path ? "bold" : "normal",
-                  fontSize: "16px",
-                  borderBottom: activeLink === link.path ? "2px solid #34A76C" : "none",
-                  transition: "color 0.3s ease-in-out, border-bottom 0.3s ease-in-out",
-                }}
-              >
-                {link.title}
-              </Typography>
-            ))}
+          {/* Desktop Navigation (Only on Home Page) */}
+          {pathname === "/" && (
+            <Stack
+              direction="row"
+              spacing={3}
+              sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
+            >
+              {navLinks.map((link, index) => (
+                <Typography
+                  key={index}
+                  onClick={() => handleNavigation(link.path)}
+                  sx={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    color: activeLink === link.path ? "#34A76C" : "#A0A0A0",
+                    fontWeight: activeLink === link.path ? "bold" : "normal",
+                    fontSize: "16px",
+                    borderBottom: activeLink === link.path ? "2px solid #34A76C" : "none",
+                    transition: "color 0.3s ease-in-out, border-bottom 0.3s ease-in-out",
+                  }}
+                >
+                  {link.title}
+                </Typography>
+              ))}
+            </Stack>
+          )}
 
-            {/* Auth Buttons */}
+          {/* Auth Buttons (Desktop) */}
+          <Stack direction="row" spacing={2} sx={{ display: { xs: "none", md: "flex" } }}>
             {isAuthenticated ? (
               <CaspianButton variant="custom2" size="medium" onClick={handleLogout}>
                 Logout
@@ -137,42 +145,57 @@ const Header = () => {
             <CgMenuRight />
           </IconButton>
         </Toolbar>
+
+      {/* Mobile Auth Buttons (Outside Drawer, Below Menu Icon) */}
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          display: { xs: "flex", md: "none" },
+          justifyContent: 'end',
+            padding: '0 10px',
+            background: '#ffffff',
+        }}
+      >
+        {isAuthenticated ? (
+          <CaspianButton variant="custom2" size="medium" onClick={handleLogout}>
+            Logout
+          </CaspianButton>
+        ) : (
+          <>
+            <CaspianButton variant="custom2" size="medium" onClick={() => router.push("/Login")}>
+              Log in
+            </CaspianButton>
+            <CaspianButton variant="custom3" size="medium" onClick={() => router.push("/SignUp")}>
+              Sign Up
+            </CaspianButton>
+          </>
+        )}
+      </Stack>
+
       </AppBar>
+
 
       {/* Mobile Sidebar Drawer */}
       <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <List sx={{ width: 250, padding: "16px 8px" }}>
-          {navLinks.map((link, index) => (
-            <ListItem
-              button
-              key={index}
-              onClick={() => handleNavigation(link.path)}
-              sx={{
-                color: activeLink === link.path ? "#34A76C" : "#A0A0A0",
-                fontWeight: activeLink === link.path ? "bold" : "normal",
-                fontSize: "16px",
-                borderBottom: activeLink === link.path ? "2px solid #34A76C" : "none",
-              }}
-            >
-              <ListItemText primary={link.title} />
-            </ListItem>
-          ))}
-
-          {/* Mobile Auth Buttons */}
-          {isAuthenticated ? (
-            <ListItem button onClick={handleLogout}>
-              <ListItemText primary="Logout" sx={{ color: "#34A76C", fontWeight: "bold" }} />
-            </ListItem>
-          ) : (
-            <>
-              <ListItem button onClick={() => router.push("/Login")}>
-                <ListItemText primary="Log in" />
+          {/* Show nav links only on Home Page */}
+          {pathname === "/" &&
+            navLinks.map((link, index) => (
+              <ListItem
+                button
+                key={index}
+                onClick={() => handleNavigation(link.path)}
+                sx={{
+                  color: activeLink === link.path ? "#34A76C" : "#A0A0A0",
+                  fontWeight: activeLink === link.path ? "bold" : "normal",
+                  fontSize: "16px",
+                  borderBottom: activeLink === link.path ? "2px solid #34A76C" : "none",
+                }}
+              >
+                <ListItemText primary={link.title} />
               </ListItem>
-              <ListItem button onClick={() => router.push("/SignUp")}>
-                <ListItemText primary="Sign Up" />
-              </ListItem>
-            </>
-          )}
+            ))}
         </List>
       </Drawer>
     </>
