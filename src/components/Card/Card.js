@@ -1,8 +1,8 @@
 import React from "react";
-  import Image from "next/image";
+import Image from "next/image";
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import CaspianButton from "../Button/Button";
-  import styles from "./Card.module.scss";
+import styles from "./Card.module.scss";
 
 
 const FeatureCard = ({
@@ -14,6 +14,7 @@ const FeatureCard = ({
   title = "",
   showDescription = false,
   description = "",
+  subDescription, 
   showButton = false,
   buttonText = "",
   isSelected = false,
@@ -24,29 +25,45 @@ const FeatureCard = ({
   variant,
   iconsx,
   additionalButton = null,
+  cardDirection = "row", 
+  cardAlignItems = "flex-start", 
+  cardJustifyContent = "flex-start", 
+  btnPOsitionRight,
+  btnPOsitionLeft,
+  btnPOsitionTop,
+  btnPOsitionBottom,
+  btnWidth,
+  btnPosition="absolute", 
+  cardAlign= "center",
 }) => {
   return (
     <Card
-        className={`${styles.featureCard} ${isSelected ? styles.selected : ""}`}
-        sx={{ ...sx }}
+      className={`${styles.featureCard} ${isSelected ? styles.selected : ""}`}
+      sx={{ ...sx ,position:"relative", alignItems:cardAlign}}
+      
+    >
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: cardDirection,
+          alignItems: cardAlignItems,
+          justifyContent: cardJustifyContent,
+          padding:"0px !important"
+        }}
       >
-        <CardContent sx={{ flexDirection: "row", display: "flex" }}>
-          <Stack spacing={2}>
-            {showImage && image && (
-              <Image
-                src={image}
-                alt="Card Image"
-                className={styles.cardImage}
-                style={imageSx}
-                width={85} 
-                height={85} 
-              />
-            )}
-             </Stack>
-
+        {showImage && image && (
+          <Image
+            src={image}
+            alt="Card Image"
+            className={styles.cardImage}
+            style={imageSx}
+            width={85}
+            height={85}
+          />
+        )}
 
         {showIcon && (
-          <Box mb={2} >
+          <Box mb={2}>
             <Box sx={{ mr: 2, ...iconsx }}>{icon}</Box>
           </Box>
         )}
@@ -63,22 +80,44 @@ const FeatureCard = ({
               <Typography variant="body2" color="textSecondary">
                 {description}
               </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {subDescription}
+              </Typography>
             </Box>
           )}
 
           {showButton && (
-            <Stack mt={2} display={"flex"} flexDirection={"row"} gap={2}>
+            <Stack mt={2} display={"flex"} gap={2}
+            sx={{
+              width:btnWidth,
+             alignSelf:"end",
+             position:btnPosition,
+             right:btnPOsitionRight,
+             left:btnPOsitionLeft,
+             top:btnPOsitionTop,
+             bottom:btnPOsitionBottom,
+            }}
+            >
               <CaspianButton
                 variant={variant}
                 size="medium"
                 title={buttonText}
                 onClick={onButtonClick}
               />
-              {additionalButton && (
-                <Stack>
-                  {additionalButton}
-                </Stack>
-              )}
+            </Stack>
+          )}
+          {additionalButton && (
+            <Stack
+            sx={{
+              alignSelf:"end",
+              position:btnPosition,
+              right:btnPOsitionRight,
+              left:btnPOsitionLeft,
+              top:btnPOsitionTop,
+              bottom:btnPOsitionBottom,
+             }}
+            >
+              {additionalButton}
             </Stack>
           )}
         </Box>

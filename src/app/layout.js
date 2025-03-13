@@ -3,7 +3,8 @@ import "./globals.css";
 import Container from "../components/Container/Container";
 import Footer from "../module/footer";
 import Header from "../components/Header/Header";
-
+import ReduxProvider from "../components/providers/ReduxProvider";
+import ReactQueryProvider from "../components/providers/ReactQueryProvider"; // ✅ Import
 
 const inter = Poppins({
   weight: "400",
@@ -19,12 +20,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Container>
-          <Header />
-          {children}
-        </Container>
-        <Footer />
-
+        <ReduxProvider> 
+          <ReactQueryProvider> 
+            <Container>
+              <Header />
+              {children}
+            </Container>
+            <Footer />
+          </ReactQueryProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

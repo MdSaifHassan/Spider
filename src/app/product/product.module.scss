@@ -1,0 +1,90 @@
+.ProductPageContainer {
+  height: 100%;
+  margin-top: 8rem;
+
+  h4 {
+    color: #34a76c;
+    font-size: 1.25rem !important;
+
+    @media (min-width: 600px) {
+      font-size: 1.625rem !important;
+    }
+
+    @media (min-width: 960px) {
+      font-size: 2.25rem !important;
+    }
+  }
+
+  h5 {
+    // color: #34a76c;
+    font-size: 1.2rem !important;
+
+    @media (min-width: 600px) {
+      font-size: 1.625rem !important;
+    }
+
+    @media (min-width: 960px) {
+      font-size: 2.25rem !important;
+    }
+  }
+
+  @media (min-width: 960px) {
+    margin-top: 5rem;
+  }
+}
+
+.gridContainer {
+  height: auto; 
+  @media (min-height: 500px) {
+    height: calc(80vh - 1.5rem); 
+  }
+  @media (max-width: 600px) {
+    height: auto; 
+    padding: 1rem;
+  }
+  @media (min-width: 600px) and (max-width: 960px) {
+    height: auto; 
+    padding: 1rem;
+  }
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;
+  text-align: center;
+  height: 100%;
+  border-radius: 8px 0px 0px 8px;
+  padding: 0 0 0 1rem ;
+
+  @media (max-width: 600px) {
+    flex-direction: column; 
+    height: auto; 
+    padding: 1rem;
+  }
+
+  @media (min-width: 600px) and (max-width: 960px) {
+    flex-direction: row; 
+    gap: 1rem; 
+    align-items: center;
+    height: 50% !important; 
+    max-height: 400px; 
+  }
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0px 8px 8px 0px;
+
+  @media (max-width: 600px) {
+    height: 200px; 
+  }
+
+  @media (min-width: 600px) and (max-width: 960px) {
+    height: 300px; 
+  }
+}

@@ -8,8 +8,8 @@ import { Box, Link, Typography, Container, Paper } from "@mui/material";
 import validationSchema from "@/src/utils/formvalidation/SignupValidation";
 import { useSignup } from "@/src/api/api";
 import { signupSuccess } from "@/src/utils/slices/authSlice";
-import CustomTextField from "@/src/Components/TextField/Textfield";
 import CaspianButton from "@/src/Components/Button/Button";
+import CustomTextField from "@/src/components/TextField/Textfield";
 
 const SignUpPage = () => {
   const dispatch = useDispatch();

@@ -38,6 +38,7 @@ const Carousel = ({
     const sliderRef = React.useRef(null);
 
     const defaultSettings = {
+        arrows:false,
         dots: true,
         infinite: true,
         speed: 500,
