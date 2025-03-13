@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 import { Box, Link, Typography, Container, Paper } from "@mui/material";
 import validationSchema from "@/src/utils/formvalidation/SignupValidation";
 import { useSignup } from "@/src/api/api";
-import CustomTextField from "@/src/components/TextField/Textfield";
-import CaspianButton from "@/src/components/Button/Button";
 import { signupSuccess } from "@/src/utils/slices/authSlice";
+import CaspianButton from "@/src/Components/Button/Button";
+import CustomTextField from "@/src/components/TextField/Textfield";
 
 const SignUpPage = () => {
   const dispatch = useDispatch();

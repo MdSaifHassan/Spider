@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 import { Box, Link, Typography, Container, Paper } from "@mui/material";
 import validationSchema from "@/src/utils/formvalidation/LoginValidation";
 import { useLogin } from "@/src/api/api";
-import CustomTextField from "@/src/components/TextField/Textfield";
-import CaspianButton from "@/src/components/Button/Button";
 import { loginSuccess } from "@/src/utils/slices/authSlice";
+import CaspianButton from "@/src/Components/Button/Button";
+import CustomTextField from "@/src/components/TextField/Textfield";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -93,7 +93,7 @@ const LoginPage = () => {
           )}
 
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-            <Link href="#" underline="hover" color="gray" variant="body2" sx={{ ":hover": { color: "#34A76C" } }}>
+            <Link href="/ForgotPassword" underline="hover" color="gray" variant="body2" sx={{ ":hover": { color: "#34A76C" } }}>
               Forgot Password?
             </Link>
             <Link href="/SignUp" underline="hover" color="gray" variant="body2" sx={{ ":hover": { color: "#34A76C" } }}>

@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { loginSuccess, signupSuccess } from "@/src/utils/slices/authSlice";
 import apiClient from "./apiClient";
@@ -19,35 +19,59 @@ export const useServices = () => {
 };
 
 export const useLogin = () => {
-    return useMutation({
-      mutationFn: async (values) =>
-        apiClient("userlogin", {
-          method: "POST",
-          body: JSON.stringify(values),
-        }),
-      onSuccess: (data) => {
-        console.log("Login Success:", data);
-        return data;
-      },
-      onError: (error) => {
-        console.error("Login Failed:", error.message);
-      },
-    });
-  };
+  const dispatch = useDispatch();
+  return useMutation({
+    mutationFn: async (values) =>
+      apiClient("userlogin", {
+        method: "POST",
+        body: JSON.stringify(values),
+      }),
+    onSuccess: (data) => {
+      if (data?.result === "success" && data?.data?.token) {
+        const { token, ...user } = data.data;
+        dispatch(loginSuccess({ token, user }));
+        sessionStorage.setItem("authToken", token);
+      }
+    },
+    onError: (error) => {
+      console.error("Login Failed:", error.message);
+    },
+  });
+};
 
 export const useSignup = () => {
-    return useMutation({
-      mutationFn: async (values) =>
-        apiClient("usersignup", {
-          method: "POST",
-          body: JSON.stringify(values),
-        }),
-      onSuccess: (data) => {
-        console.log("Signup Success:", data);
-        return data; 
-      },
-      onError: (error) => {
-        console.error("Signup Failed:", error.message);
-      },
-    });
-  };
+  const dispatch = useDispatch();
+  return useMutation({
+    mutationFn: async (values) =>
+      apiClient("usersignup", {
+        method: "POST",
+        body: JSON.stringify(values),
+      }),
+    onSuccess: (data) => {
+      if (data?.result === "success" && data?.data?.token) {
+        const { token, ...user } = data.data;
+        dispatch(signupSuccess({ token, user }));
+        sessionStorage.setItem("authToken", token);
+      }
+    },
+    onError: (error) => {
+      console.error("Signup Failed:", error.message);
+    },
+  });
+};
+
+export const useForgotPassword = () => {
+  return useMutation({
+    mutationFn: async (values) =>
+      apiClient("forgot-password", {
+        method: "PUT",
+        body: JSON.stringify(values),
+      }),
+    onSuccess: (data) => {
+      console.log("Password reset successfully", data);
+    },
+    onError: (error) => {
+      console.error("Password reset failed:", error.message);
+    },
+  });
+};
